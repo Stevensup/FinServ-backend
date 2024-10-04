@@ -30,6 +30,9 @@ public class CustomerModel {
     @Column(name = "phone", length = 20)
     private String phone;
 
+    @Column(name = "username", length = 255)
+    private String username;
+
     @Column(name = "address", length = 255)
     private String address;
 
@@ -37,8 +40,8 @@ public class CustomerModel {
     @Temporal(TemporalType.DATE)
     private Date registrationDate;
 
-//    @Column(name = "notification_preference_id")
-//    private Integer notificationPreferenceId;
+    @Column(name = "notification_preference_id")
+    private Integer notificationPreferenceId;
 
 //    @ManyToOne
 //    @JoinColumn(name = "notification_preference_id", insertable = false, updatable = false)

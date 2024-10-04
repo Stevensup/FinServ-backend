@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @Transactional
 @CrossOrigin(origins = { "http://localhost:8090", "http://localhost:8080", "*" })
 @RestController
@@ -25,6 +28,31 @@ public class CustomerController {
         return customerService.createCustomer(customer);
     }
 
+    @GetMapping("/{id}")
+    @Operation(summary = "Get a customer by ID", description = "Get a customer by ID")
+    @ApiResponse(responseCode = "200", description = "Customer found")
+    public Optional<CustomerModel> getCustomerById(@PathVariable int id) {
+        return customerService.getCustomerById(id);
+    }
 
-    
+    @GetMapping("/all")
+    @Operation(summary = "Get all customers", description = "Get all customers")
+    @ApiResponse(responseCode = "200", description = "Customers retrieved")
+    public List<CustomerModel> getAllCustomers() {
+        return customerService.getAllCustomers();
+    }
+
+    @PutMapping("/update/{id}")
+    @Operation(summary = "Update a customer", description = "Update a customer")
+    @ApiResponse(responseCode = "200", description = "Customer updated")
+    public CustomerModel updateCustomer(@PathVariable int id, @RequestBody CustomerModel customer) {
+        return customerService.updateCustomer(id, customer);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @Operation(summary = "Delete a customer", description = "Delete a customer")
+    @ApiResponse(responseCode = "200", description = "Customer deleted")
+    public void deleteCustomer(@PathVariable int id) {
+        customerService.deleteCustomer(id);
+    }
 }

@@ -1,9 +1,7 @@
 package com.edu.unbosque.Digital.FinServ.Controller;
 
 
-import com.edu.unbosque.Digital.FinServ.Model.CustomerModel;
 import com.edu.unbosque.Digital.FinServ.Model.Notification_PreferencesModel;
-import com.edu.unbosque.Digital.FinServ.Service.CustomerService;
 import com.edu.unbosque.Digital.FinServ.Service.Notification_PreferencesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @Transactional

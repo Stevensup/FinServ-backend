@@ -40,7 +40,7 @@ public class Notification_PreferencesController {
     @GetMapping("/all")
     @Operation(summary = "Get all notification_preferences", description = "Get all notification_preferences")
     @ApiResponse(responseCode = "200", description = "Notification_Preferences retrieved")
-    public List<Notification_PreferencesModel> getAllNotification_Preferences() {
+    public Iterable<Notification_PreferencesModel> getAllNotification_Preferences() {
         return notification_preferencesService.getAllNotification_Preferences();
     }
 

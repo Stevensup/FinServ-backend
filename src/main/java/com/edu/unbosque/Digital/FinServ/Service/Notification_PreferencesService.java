@@ -26,7 +26,7 @@ public class Notification_PreferencesService {
 
     public Notification_PreferencesModel updateNotification_Preferences(int id, Notification_PreferencesModel notification_Preferences) {
         if (notification_PreferencesRepository.existsById(id)) {
-            notification_Preferences.setNotificationId(id);
+            notification_Preferences.setPreferenceId(id);
             return notification_PreferencesRepository.save(notification_Preferences);
         } else {
             throw new RuntimeException("Notification_Preferences not found with id " + id);

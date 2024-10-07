@@ -28,7 +28,10 @@ public class User_LoginsController {
     }
 
     @PostMapping("/{id}")
-    @Operation(summary = "Get a user logins by ID", description = "Get a user logins by ID")
+    @Operation(
+            summary = "Get a user logins by ID",
+            description = "Get a user logins by ID"
+    )
     @ApiResponse(responseCode = "200", description = "User logins found")
     public Optional<User_LoginsModel> getUser_loginsById(@PathVariable int id){
         return user_loginsService.getUser_loginsById(id);
@@ -48,7 +51,7 @@ public class User_LoginsController {
         return user_loginsService.updateUser_logins(id, user_logins);
     }
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete a logins", description = "Delete a logins")
     @ApiResponse(responseCode = "200", description = "User deleted")
     public void deleteUser_logins(@PathVariable int id){

@@ -12,7 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "login_attempts")
-public class Login_attemptsModel {
+public class Login_AttemptsModel {
     
     @Id
     @Column(name = "attempt_id", nullable = false, updatable = false)
@@ -33,7 +33,7 @@ public class Login_attemptsModel {
 
     @Override
     public String toString(){
-        return "Login_attempModel [attemptId=" + attemptId + ", customerId=" + customerId + ", userName=" 
+        return "Login_AttempModel [attemptId=" + attemptId + ", customerId=" + customerId + ", userName=" 
         + userName + ", attemptDate=" +attemptDate+", success=" + success 
         +"]";
     }

@@ -11,7 +11,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "user_logins")
-public class User_loginsModel {
+public class User_LoginsModel {
     
     @Id
     @Column(name = "login_id", nullable = false, updatable = false)

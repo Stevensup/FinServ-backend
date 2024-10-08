@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Transactional
-@CrossOrigin(origins = { "http://localhost:8090", "http://localhost:8080", "*" })
+@CrossOrigin(
+    origins = { "http://localhost:8090", "http://localhost:8080", "*" }
+)
 @RestController
 @RequestMapping("/Notifications")
 public class NotificationsController{
@@ -20,36 +22,71 @@ public class NotificationsController{
     private NotificationsService notificationsService;
 
     @PostMapping("create")
-    @Operation(summary = "Create a new notifications", description = "Create a new notifications")
-    @ApiResponse(responseCode = "200", description = "Notifications created")
+    @Operation(
+        summary = "Create a new notifications", 
+        description = "Create a new notifications"
+    )
+    @ApiResponse(
+        responseCode = "200", 
+        description = "Notifications created"
+    )
+
     public NotificationsModel createNotifications(@RequestBody NotificationsModel notifications){
         return notificationsService.createNotifications(notifications);
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get a notifications by ID", description = "Get a notifications by ID")
-    @ApiResponse(responseCode = "200", description = "Notifications found")
+    @Operation(
+        summary = "Get a notifications by ID", 
+        description = "Get a notifications by ID"
+    )
+    @ApiResponse(
+        responseCode = "200", 
+        description = "Notifications found"
+    )
+
     public Optional<NotificationsModel> getNotificationsById(@PathVariable int id){
         return Optional.ofNullable(notificationsService.getNotificationsById(id));
     }
 
     @GetMapping("/all")
-    @Operation(summary = "Get all notifications", description = "Get all notifications")
-    @ApiResponse(responseCode = "200", description = "Notifications retrieved")
+    @Operation(
+        summary = "Get all notifications", 
+        description = "Get all notifications"
+    )
+    @ApiResponse(
+        responseCode = "200", 
+        description = "Notifications retrieved"
+    )
+
     public Iterable<NotificationsModel> getAllNotifications(){
         return notificationsService.getAllNotifications();
     }
 
     @PutMapping("/update/{id}")
-    @Operation(summary = "Update a notifications", description = "Update a notifications")
-    @ApiResponse(responseCode = "200", description = "Notifications updated")
+    @Operation(
+        summary = "Update a notifications", 
+        description = "Update a notifications"
+    )
+    @ApiResponse(
+        responseCode = "200", 
+        description = "Notifications updated"
+    )
+
     public NotificationsModel updateNotifications(@PathVariable int id, @RequestBody NotificationsModel notifications){
         return notificationsService.updateNotifications(id, notifications);
     }
 
     @DeleteMapping("/delete/{id}")
-    @Operation(summary = "Delete a notifications", description = "Delete a notifications")
-    @ApiResponse(responseCode = "200", description = "Notifications deleted")
+    @Operation(
+        summary = "Delete a notifications", 
+        description = "Delete a notifications"
+    )
+    @ApiResponse(
+        responseCode = "200", 
+        description = "Notifications deleted"
+    )
+    
     public void deleteNotifications(@PathVariable int id){
         notificationsService.deleteNotifications(id);
     }

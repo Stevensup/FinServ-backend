@@ -16,22 +16,22 @@ public class Transaction_LogsService {
     private Transaction_LogsRepository transactionLogsRepository;
 
     // Método para crear un nuevo registro de log
-    public Transaction_LogsModel createLog(Transaction_LogsModel transactionLog) {
+    public Transaction_LogsModel createTransactionLog(Transaction_LogsModel transactionLog) {
         return transactionLogsRepository.save(transactionLog);
     }
 
     // Método para obtener un registro de log por ID
-    public Optional<Transaction_LogsModel> getLogById(int id) {
+    public Optional<Transaction_LogsModel> getTransactionLogById(int id) {
         return transactionLogsRepository.findById(id);
     }
 
     // Método para obtener todos los registros de log
-    public List<Transaction_LogsModel> getAllLogs() {
+    public List<Transaction_LogsModel> getAllTransactionLogs() {
         return transactionLogsRepository.findAll();
     }
 
     // Método para actualizar un registro de log
-    public Transaction_LogsModel updateLog(int id, Transaction_LogsModel transactionLog) {
+    public Transaction_LogsModel updateTransactionLog(int id, Transaction_LogsModel transactionLog) {
         if (transactionLogsRepository.existsById(id)) {
             transactionLog.setLogId(id);
             return transactionLogsRepository.save(transactionLog);
@@ -41,7 +41,7 @@ public class Transaction_LogsService {
     }
 
     // Método para eliminar un registro de log
-    public void deleteLog(int id) {
+    public void deleteTransactionLog(int id) {
         if (transactionLogsRepository.existsById(id)) {
             transactionLogsRepository.deleteById(id);
         } else {

@@ -25,8 +25,10 @@ public class Transaction_LogsModel {
     @Temporal(TemporalType.TIMESTAMP)
     private Date logDate = new Date();
 
-    // Relación con la tabla transactions
+    // Relación con la tabla: Transactions (Verificada)
+
     @ManyToOne
     @JoinColumn(name = "transaction_id", insertable = false, updatable = false)
     private TransactionsModel transaction;
+
 }

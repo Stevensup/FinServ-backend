@@ -33,16 +33,18 @@ public class TransactionsModel {
     @Temporal(TemporalType.TIMESTAMP)
     private Date transactionDate;
 
-    // Relaciones con otras tablas (si es necesario agregar)
-    // @ManyToOne
-    // @JoinColumn(name = "customer_id", insertable = false, updatable = false)
-    // private CustomerModel customer;
+    // Relaciones con las tablas: Customers, Financial_Products y Transaction_Types (Verificadas)
 
-    // @ManyToOne
-    // @JoinColumn(name = "product_id", insertable = false, updatable = false)
-    // private FinancialProductModel product;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+    private CustomerModel customer;
 
-    // @ManyToOne
-    // @JoinColumn(name = "transaction_type_id", insertable = false, updatable = false)
-    // private TransactionTypesModel transactionType;
+    @ManyToOne
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
+    private Financial_ProductsModel product;
+
+    @ManyToOne
+    @JoinColumn(name = "transaction_type_id", insertable = false, updatable = false)
+    private Transaction_TypesModel transactionType;
+
 }

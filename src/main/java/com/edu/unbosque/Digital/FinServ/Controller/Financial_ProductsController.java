@@ -43,7 +43,7 @@ public class Financial_ProductsController {
         return financial_productsService.createFinancial_Products(financial_products);
     }
 
-    @PostMapping({"/{id}"})
+    @GetMapping({"/{id}"})
     @Operation(
         summary = "Get a Financial_Products by id",
         description = "Get a Financial_Products by id"
@@ -57,7 +57,7 @@ public class Financial_ProductsController {
         return financial_productsService.getFinancialProductsById(id);
     }
 
-    @PostMapping({"/all"})
+    @GetMapping({"/all"})
     @Operation(
         summary = "Get all Financial_Products",
         description = "Get all Financial_Products"
@@ -71,7 +71,7 @@ public class Financial_ProductsController {
         return financial_productsService.getAllFinancialProducts();
     }
 
-    @PostMapping({"/update/{id}"})
+    @PutMapping({"/update/{id}"})
     @Operation(
         summary = "Update a Financial_Products",
         description = "Update a Financial_Products"
@@ -85,7 +85,7 @@ public class Financial_ProductsController {
         return financial_productsService.updateFinancialProducts(id, financial_products);
     }
 
-    @PostMapping({"/delete/{id}"})
+    @DeleteMapping({"/delete/{id}"})
     @Operation(
         summary = "Delete a Financial_Products",
         description = "Delete a Financial_Products"

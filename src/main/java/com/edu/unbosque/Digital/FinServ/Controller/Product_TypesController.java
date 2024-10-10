@@ -43,7 +43,7 @@ public class Product_TypesController {
         return product_typesService.createProduct_Types(product_types);
     }
 
-    @PostMapping({"/{id}"})
+    @GetMapping({"/{id}"})
     @Operation(
         summary = "Get a Product_Types by id", 
         description = "Get a Product_Types by id"
@@ -58,7 +58,7 @@ public class Product_TypesController {
         return product_typesService.getProductTypesById(id);
     }   
 
-    @PostMapping("/all")
+    @GetMapping("/all")
     @Operation(
         summary = "Get all Product_Types",
         description = "Get all Product_Types"
@@ -73,7 +73,7 @@ public class Product_TypesController {
         return product_typesService.getAllProductTypes();
     }
 
-    @PostMapping({"/update/{id}"})
+    @PutMapping({"/update/{id}"})
     @Operation(
         summary = "Update a Product_Types ", 
         description = "Update a Product_Types"
@@ -88,7 +88,7 @@ public class Product_TypesController {
         return product_typesService.updateProduct_Types(id, product_types);
     }
 
-    @PostMapping({"/delete/{id}"})
+    @DeleteMapping({"/delete/{id}"})
     @Operation(
         summary = "Delete a Product_Types", 
         description = "Delete a Product_Types"

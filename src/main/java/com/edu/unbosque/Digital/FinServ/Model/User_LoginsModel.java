@@ -34,6 +34,10 @@ public class User_LoginsModel {
     @Temporal(TemporalType.DATE)
     private Date lastLogin;
 
+//    @ManyToOne
+//    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+//    private  Customer customer;
+
     @Override
     public String toString(){
         return "User_loginsModel [loginId=" + loginId + ", customerId=" + customerId + ", username=" + username + ", passwordHash="

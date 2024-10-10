@@ -12,45 +12,83 @@ import java.util.List;
 import java.util.Optional;
 
 @Transactional
-@CrossOrigin(origins = { "http://localhost:8090", "http://localhost:8080", "*" })
+@CrossOrigin(
+    origins = { "http://localhost:8090", "http://localhost:8080", "*" }
+)
 @RestController
 @RequestMapping("/LoginAttempts")
+
 public class Login_AttemptsController {
     
     @Autowired
     private Login_AttemptsService login_attemptsService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create a new Login_attempts", description = "Create a new Login_attempts")
-    @ApiResponse(responseCode = "200", description = "Login_Attempts created")
+    @Operation(
+        summary = "Create a new Login_attempts", 
+        description = "Create a new Login_attempts"
+    )
+    @ApiResponse(
+        responseCode = "200", 
+        description = "Login_Attempts created"
+    )
+
     public Login_AttemptsModel createLoginAttempts(@RequestBody Login_AttemptsModel login_attempts){
         return login_attemptsService.createLogin_attempts(login_attempts);
     }
 
-    @PostMapping("/{id}")
-    @Operation(summary = "Get a Login_attempts by ID", description = "Get a Login_attempts by ID")
-    @ApiResponse(responseCode = "200", description = "Login_Attempts found")
+    @GetMapping("/{id}")
+    @Operation(
+        summary = "Get a Login_attempts by ID", 
+        description = "Get a Login_attempts by ID"
+    )
+    @ApiResponse(
+        responseCode = "200", 
+        description = "Login_Attempts found"
+    )
+    
     public Optional<Login_AttemptsModel> getLoginAttemptsById(@PathVariable int id){
         return login_attemptsService.getLoginAttemptsById(id);
     }
 
-    @PostMapping("/all")
-    @Operation(summary = "Get all Login_attempts", description = "Get all Login_attempts")
-    @ApiResponse(responseCode = "200", description = "Login_Attempts retrieved")
+    @GetMapping("/all")
+    @Operation(
+        summary = "Get all Login_attempts", 
+        description = "Get all Login_attempts"
+    )
+    @ApiResponse(
+        responseCode = "200", 
+        description = "Login_Attempts retrieved"
+    )
+
     public List<Login_AttemptsModel> getAllLoginAttempts(){
         return login_attemptsService.getAllLoginAttempts();
     }
 
-    @PostMapping("/update/{id}")
-    @Operation(summary = "Update a Login_attempts", description = "Update a Login_attempts")
-    @ApiResponse(responseCode = "200", description = "Login_Attempts updated")
+    @PutMapping("/update/{id}")
+    @Operation(
+        summary = "Update a Login_attempts", 
+        description = "Update a Login_attempts"
+    )
+    @ApiResponse(
+        responseCode = "200", 
+        description = "Login_Attempts updated"
+    )
+
     public Login_AttemptsModel updateLoginAttempts(@PathVariable int id, @RequestBody Login_AttemptsModel loginAttempts){
         return login_attemptsService.updateLoginAttempts(id, loginAttempts);
     }
 
-    @PostMapping("/delete/{id}")
-    @Operation(summary = "Delete a Login_attempts", description = "Delete a Login_attempts")
-    @ApiResponse(responseCode = "200", description = "Login_Attempts deleted")
+    @DeleteMapping("/delete/{id}")
+    @Operation(
+        summary = "Delete a Login_attempts", 
+        description = "Delete a Login_attempts"
+    )
+    @ApiResponse(
+        responseCode = "200", 
+        description = "Login_Attempts deleted"
+    )
+
     public void deleteLoginAttempts(@PathVariable int id){
         login_attemptsService.deleteLoginAttempts(id);
     }

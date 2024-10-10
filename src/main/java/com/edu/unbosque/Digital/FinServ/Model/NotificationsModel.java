@@ -30,6 +30,14 @@ public class NotificationsModel {
     @Temporal(TemporalType.DATE)
     private Date sendDate;
 
+//    @ManyToOne
+//    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+//    private  Customer customer;
+
+//    @ManyToOne
+//    @JoinColumn(name = "preference_id", insertable = false, updatable = false)
+//    private  NotificationPreference notificationPreference;
+
     @Override
     public String toString(){
         return "NotificationsModel [notificationId=" + notificationId + ", customerId=" + customerId + ",notificationPreferenceId="

@@ -23,7 +23,7 @@ public class Customer_ProductsService {
         return customer_productsRepository.findById(id);
     }
 
-    public List<Customer_ProductsModel> getAllCustomeProducts() {
+    public List<Customer_ProductsModel> getAllCustomerProducts() {
         return customer_productsRepository.findAll();
     }
 

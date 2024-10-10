@@ -1,5 +1,7 @@
 package com.edu.unbosque.Digital.FinServ.Model;
 
+//import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -22,6 +24,11 @@ public class Product_TypesModel {
 
     @Column(name = "type_name", nullable = false, length = 50)
     private String typeName;
+
+
+    //Relation product_type with financial_products
+    // @OneToMany(mappedBy = "productType")
+    // private List<Financial_ProductsModel> financialProducts;
 
 
     @Override

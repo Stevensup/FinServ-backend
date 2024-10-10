@@ -39,15 +39,16 @@ public class Customer_ProductsController {
     )
 
     public Customer_ProductsModel createCustomerProducts(@RequestBody Customer_ProductsModel customer_products) {
-        return customer_productsService.createCustomer_products(customer_products);
+        return customer_productsService.createCustomer_Products(customer_products);
     }
 
-    @PostMapping({"/{id}"})
+    @GetMapping({"/{id}"})
     @Operation(
         summary = "Get a Customer_Products by ID",
         description = "Get a Customer_Products by ID"
 
     )
+    
     @ApiResponse(
         responseCode = "200", 
         description = "Customer_Products found"
@@ -57,7 +58,7 @@ public class Customer_ProductsController {
         return customer_productsService.getCustomerProductsById(id);
     }
 
-    @PostMapping({"/all"})
+    @GetMapping({"/all"})
     @Operation(
         summary = "Get all Customer_Products",
         description = "Get all Customer_Products"
@@ -72,7 +73,7 @@ public class Customer_ProductsController {
         return customer_productsService.getAllCustomeProducts();
     }
 
-    @PostMapping({"/update/{id}"})
+    @PutMapping({"/update/{id}"})
     @Operation(
         summary = "Update a Customer_Products",
         description = "Update a Customer_Products"
@@ -86,7 +87,7 @@ public class Customer_ProductsController {
         return customer_productsService.updateCustomerProducts(id, customer_products);
     }
 
-    @PostMapping({"/delete/{id}"})
+    @DeleteMapping({"/delete/{id}"})
     @Operation(
         summary = "Delete a Customer_Products",
         description = "Delete a Customer_Products"

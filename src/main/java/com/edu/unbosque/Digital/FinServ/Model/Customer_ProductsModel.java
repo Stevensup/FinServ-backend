@@ -36,6 +36,15 @@ public class Customer_ProductsModel {
         INACTIVE
     }
 
+    // @ManyToOne
+    // @JoinColumn(name = "customer_product_id")
+    // private Customer_ProductsModel customerProductsModel;
+
+    // @ManyToOne
+    // @JoinColumn(name = "product_id")
+    // private Financial_ProductsModel financialProductsModel;
+
+
     @Override
     public String toString() {
         return "Customer_ProductsModel [customerProductId=" + customerProductId + ", customerId=" + customerId + ", productId=" + productId + ", acquisitionDate=" + acquisitionDate + ", productStatus=" + productStatus + "]";

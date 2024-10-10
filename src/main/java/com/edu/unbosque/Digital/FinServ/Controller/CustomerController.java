@@ -22,8 +22,14 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping("/create")
-    @Operation(summary = "Create a new customer", description = "Create a new customer")
-    @ApiResponse(responseCode = "200", description = "Customer created")
+    @Operation(
+            summary = "Create a new customer",
+            description = "Create a new customer"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "Customer created"
+    )
     public CustomerModel createCustomer(@RequestBody CustomerModel customer) {
         return customerService.createCustomer(customer);
     }

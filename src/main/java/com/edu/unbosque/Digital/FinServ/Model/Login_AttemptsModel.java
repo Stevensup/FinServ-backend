@@ -31,6 +31,10 @@ public class Login_AttemptsModel {
     @Column(name = "success", nullable = false, updatable = false)
     private int success;
 
+//    @ManyToOne
+//    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+//    private  Customer customer;
+
     @Override
     public String toString(){
         return "Login_AttempModel [attemptId=" + attemptId + ", customerId=" + customerId + ", userName=" 

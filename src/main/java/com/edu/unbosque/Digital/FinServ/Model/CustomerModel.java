@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
+//import java.util.List;
 
 @Data
 @Entity
@@ -45,6 +46,16 @@ public class CustomerModel {
 //    @ManyToOne
 //    @JoinColumn(name = "notification_preference_id", insertable = false, updatable = false)
 //    private NotificationPreference notificationPreference;
+
+    // @OneToMany(mappedBy = "customer")//
+    // private List<Customer_ProductsModel> customerProducts;
+
+    // @OneToMany(mappedBy = "customer")       
+    // private List<Credit_CardModel> creditCard;
+
+
+
+
 
     @Override
     public String toString() {

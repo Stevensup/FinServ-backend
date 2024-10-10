@@ -15,7 +15,7 @@ public class Customer_ProductsService {
     @Autowired
     private Customer_ProductsRepository customer_productsRepository;
 
-    public Customer_ProductsModel createCustomer_products(Customer_ProductsModel customer_products) {
+    public Customer_ProductsModel createCustomer_Products(Customer_ProductsModel customer_products) {
         return customer_productsRepository.save(customer_products);
     }
 

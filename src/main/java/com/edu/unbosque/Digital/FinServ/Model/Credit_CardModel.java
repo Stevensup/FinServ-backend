@@ -10,7 +10,6 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-
 @Table(name = "credit_card")
 public class Credit_CardModel {
 
@@ -18,10 +17,10 @@ public class Credit_CardModel {
     @Column(name = "idCreditCard", nullable = false, updatable = false)
     private int idCreditCard;
 
-    @Column(name = "customer_id", nullable = false, updatable = false)
+    @Column(name = "customer_id", nullable = false, insertable = false, updatable = false)
     private int customerId;
-    
-    @Column(name = "product_id", nullable = false, updatable = false)
+
+    @Column(name = "product_id", nullable = false, insertable = false, updatable = false)
     private int productId;
 
     @Column(name = "creditLimit", nullable = false, updatable = false)
@@ -33,17 +32,13 @@ public class Credit_CardModel {
     @Column(name = "expirationDate", nullable = false, updatable = false)
     private Date expirationDate;
 
-    //Relation with Customer table
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private CustomerModel customer;
 
-    // @ManyToOne
-    // @JoinColumn(name = "customer_id")
-    // private CustomerModel customer;
-
-     //Relation with financial_products table
-    // @ManyToOne
-    // @JoinColumn(name = "product_id")
-    // private Financial_ProductsModel financialProduct;
-     
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    private Financial_ProductsModel financialProduct;
 
     @Override
     public String toString() {
@@ -56,5 +51,4 @@ public class Credit_CardModel {
                 ", expirationDate=" + expirationDate +
                 '}';
     }
-    
 }

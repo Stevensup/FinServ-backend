@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
+import java.util.List;
 //import java.util.List;
 
 @Data
@@ -41,19 +42,12 @@ public class CustomerModel {
     @Column(name = "notification_preference_id")
     private Integer notificationPreferenceId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "notification_preference_id", insertable = false, updatable = false)
-//    private NotificationPreference notificationPreference;
 
-    // @OneToMany(mappedBy = "customer")//
-    // private List<Customer_ProductsModel> customerProducts;
+    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Login_AttemptsModel> loginAttempts;
 
-    // @OneToMany(mappedBy = "customer")       
-    // private List<Credit_CardModel> creditCard;
-
-
-
-
+    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<NotificationsModel> notifications;
 
     @Override
     public String toString() {

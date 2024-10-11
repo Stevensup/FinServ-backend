@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -29,14 +30,6 @@ public class NotificationsModel {
     @Column(name = "send_date", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date sendDate;
-
-//    @ManyToOne
-//    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
-//    private  Customer customer;
-
-//    @ManyToOne
-//    @JoinColumn(name = "preference_id", insertable = false, updatable = false)
-//    private  NotificationPreference notificationPreference;
 
     @Override
     public String toString(){

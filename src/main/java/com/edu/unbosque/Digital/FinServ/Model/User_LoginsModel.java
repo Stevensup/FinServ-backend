@@ -16,12 +16,13 @@ public class User_LoginsModel {
 
     @JsonIgnore
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "login_id", nullable = false, updatable = false)
     private int loginId;
 
     @JsonIgnore
-    @Column(name = "customer_id", nullable = false, updatable = false)
-    private int customerId;
+    @Column(name = "customer_id", nullable = false, insertable = false, updatable = false)
+    private int customer_id;
 
     @Column(name = "username", nullable = false, length = 100)
     private String username;
@@ -39,14 +40,14 @@ public class User_LoginsModel {
     @Temporal(TemporalType.DATE)
     private Date lastLogin;
 
-//    @ManyToOne
-//    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
-//    private  Customer customer;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private CustomerModel customerId;
 
     @Override
     public String toString(){
-        return "User_loginsModel [loginId=" + loginId + ", customerId=" + customerId + ", username=" + username + ", passwordHash="
-        + passwordHash + ", createdAt=" + createdAt + ", lastLogin=" + lastLogin 
-        + "]";
+        return "User_loginsModel [loginId=" + loginId + ", customerId=" + customer_id + ", username=" + username + ", passwordHash="
+                + passwordHash + ", createdAt=" + createdAt + ", lastLogin=" + lastLogin
+                + "]";
     }
 }

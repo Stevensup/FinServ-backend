@@ -42,4 +42,8 @@ public class User_LoginsService {
             throw new RuntimeException("User logins not found with id" + id);
         }
     }
+
+    public boolean authenticate(String username, String passwordHash) {
+        return user_loginsRepository.findByUsernameAndPasswordHash(username, passwordHash).isPresent();
+    }
 }

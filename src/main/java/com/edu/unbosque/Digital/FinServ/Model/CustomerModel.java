@@ -30,8 +30,6 @@ public class CustomerModel {
     @Column(name = "phone", length = 20)
     private String phone;
 
-    @Column(name = "username", length = 255)
-    private String username;
 
     @Column(name = "address", length = 255)
     private String address;

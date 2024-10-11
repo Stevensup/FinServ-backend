@@ -1,6 +1,7 @@
+// src/main/java/com/edu/unbosque/Digital/FinServ/Controller/Auth/AuthController.java
 package com.edu.unbosque.Digital.FinServ.Controller.Auth;
 
-import com.edu.unbosque.Digital.FinServ.Model.User_LoginsModel;
+import com.edu.unbosque.Digital.FinServ.Model.LoginRequest;
 import com.edu.unbosque.Digital.FinServ.Service.AuthService;
 import com.edu.unbosque.Digital.FinServ.Service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +26,20 @@ public class AuthController {
     );
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User_LoginsModel loginDetails) {
-        // Validar el formato del correo electrónico primero
-        if (!EMAIL_PATTERN.matcher(loginDetails.getUsername()).matches()) {
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+        String username = loginRequest.getUsername();
+        String passwordHash = loginRequest.getPasswordHash();
+
+        // Validate email format first
+        if (!EMAIL_PATTERN.matcher(username).matches()) {
             return ResponseEntity.badRequest().body("Invalid email address");
         }
 
-        // Autenticar solo si el correo electrónico es válido
-        boolean isAuthenticated = authService.authenticate(loginDetails.getUsername(), loginDetails.getPasswordHash());
+        // Authenticate only if the email is valid
+        boolean isAuthenticated = authService.authenticate(username, passwordHash);
         if (isAuthenticated) {
             // Send email notification
-            String emailJson = "{ \"destinatario\": \"" + loginDetails.getUsername() + "\", \"asunto\": \"Login Notification\", \"cuerpo\": \"You have successfully logged in.\" }";
+            String emailJson = "{ \"destinatario\": \"" + username + "\", \"asunto\": \"Login Notification\", \"cuerpo\": \"You have successfully logged in.\" }";
             try {
                 emailService.enviarCorreo(emailJson);
                 return ResponseEntity.ok("Login successful");

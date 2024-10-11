@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
@@ -13,15 +12,17 @@ import java.util.List;
 @Setter
 @Table(name = "notifications")
 public class NotificationsModel {
-    
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "notification_id", nullable = false, updatable = false)
     private int notificationId;
 
-    @Column(name = "customer_id", nullable = false, updatable = false)
-    private int customerId;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private CustomerModel customerId;
 
-    @Column(name = "notification_preference_id", nullable = false, updatable = false)
+    @Column(name = "notification_preference_id", nullable = false)
     private int notificationPreferenceId;
 
     @Column(name = "message", nullable = false, length = 100)
@@ -34,7 +35,7 @@ public class NotificationsModel {
     @Override
     public String toString(){
         return "NotificationsModel [notificationId=" + notificationId + ", customerId=" + customerId + ",notificationPreferenceId="
-        + notificationPreferenceId +", message="+ message +",sendDate= "+ sendDate
-        +"]";
+                + notificationPreferenceId +", message="+ message +",sendDate= "+ sendDate
+                +"]";
     }
 }

@@ -26,11 +26,14 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User_LoginsModel loginDetails) {
+        // Validar el formato del correo electrónico primero
+        if (!EMAIL_PATTERN.matcher(loginDetails.getUsername()).matches()) {
+            return ResponseEntity.badRequest().body("Invalid email address");
+        }
+
+        // Autenticar solo si el correo electrónico es válido
         boolean isAuthenticated = authService.authenticate(loginDetails.getUsername(), loginDetails.getPasswordHash());
         if (isAuthenticated) {
-            if (!EMAIL_PATTERN.matcher(loginDetails.getUsername()).matches()) {
-                return ResponseEntity.badRequest().body("Invalid email address");
-            }
             // Send email notification
             String emailJson = "{ \"destinatario\": \"" + loginDetails.getUsername() + "\", \"asunto\": \"Login Notification\", \"cuerpo\": \"You have successfully logged in.\" }";
             try {

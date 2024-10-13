@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.regex.Pattern;
 
 @RestController
+@CrossOrigin(
+        origins = {"http://localhost:8093","http://localhost:8080","*"}
+)
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -31,9 +34,9 @@ public class AuthController {
         String passwordHash = loginRequest.getPasswordHash();
 
         // Validate email format first
-        if (!EMAIL_PATTERN.matcher(username).matches()) {
-            return ResponseEntity.badRequest().body("Invalid email address");
-        }
+//        if (!EMAIL_PATTERN.matcher(username).matches()) {
+//            return ResponseEntity.badRequest().body("Invalid email address");
+//        }
 
         // Authenticate only if the email is valid
         boolean isAuthenticated = authService.authenticate(username, passwordHash);
@@ -41,7 +44,7 @@ public class AuthController {
             // Send email notification
             String emailJson = "{ \"destinatario\": \"" + username + "\", \"asunto\": \"Login Notification\", \"cuerpo\": \"You have successfully logged in.\" }";
             try {
-                emailService.enviarCorreo(emailJson);
+//                emailService.enviarCorreo(emailJson);
                 return ResponseEntity.ok("Login successful");
             } catch (Exception e) {
                 return ResponseEntity.status(500).body("Failed to send email");

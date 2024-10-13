@@ -33,10 +33,10 @@ public class AuthController {
         String username = loginRequest.getUsername();
         String passwordHash = loginRequest.getPasswordHash();
 
-        // Validate email format first
-//        if (!EMAIL_PATTERN.matcher(username).matches()) {
-//            return ResponseEntity.badRequest().body("Invalid email address");
-//        }
+//         Validate email format first
+        if (!EMAIL_PATTERN.matcher(username).matches()) {
+            return ResponseEntity.badRequest().body("Invalid email address");
+        }
 
         // Authenticate only if the email is valid
         boolean isAuthenticated = authService.authenticate(username, passwordHash);

@@ -44,7 +44,7 @@ public class AuthController {
             // Send email notification
             String emailJson = "{ \"destinatario\": \"" + username + "\", \"asunto\": \"Login Notification\", \"cuerpo\": \"You have successfully logged in.\" }";
             try {
-//                emailService.enviarCorreo(emailJson);
+                emailService.enviarCorreo(emailJson);
                 return ResponseEntity.ok("Login successful");
             } catch (Exception e) {
                 return ResponseEntity.status(500).body("Failed to send email");

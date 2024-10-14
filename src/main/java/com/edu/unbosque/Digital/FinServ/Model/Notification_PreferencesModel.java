@@ -20,9 +20,6 @@ public class Notification_PreferencesModel {
     @Column(name = "preference_name", nullable = false, length = 100)
     private String preferenceName;
 
-    @OneToMany(mappedBy = "notificationPreferenceId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<NotificationsModel> notifications;
-
     @Override
     public String toString() {
         return "Notification_PreferencesModel [preferenceId=" + preferenceId + ", preferenceName=" + preferenceName + "]";

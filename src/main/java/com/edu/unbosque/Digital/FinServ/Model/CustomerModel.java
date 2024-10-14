@@ -42,13 +42,6 @@ public class CustomerModel {
     @Column(name = "notification_preference_id")
     private Integer notificationPreferenceId;
 
-
-    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Login_AttemptsModel> loginAttempts;
-
-    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<NotificationsModel> notifications;
-
     @Override
     public String toString() {
         return "CustomerModel [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName + ", email="

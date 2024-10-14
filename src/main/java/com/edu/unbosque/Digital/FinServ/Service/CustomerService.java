@@ -76,4 +76,8 @@ public class CustomerService {
             throw new RuntimeException("Customer not found with id " + id);
         }
     }
+
+    public CustomerModel getCustomerByEmail(String username) {
+        return customerRepository.findByEmail(username);
+    }
 }

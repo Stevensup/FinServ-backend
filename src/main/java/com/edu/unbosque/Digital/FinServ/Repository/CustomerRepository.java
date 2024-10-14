@@ -10,5 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerModel, Integer> {
+    CustomerModel findByEmail(String username);
     // Additional query methods can be added here
 }

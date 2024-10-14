@@ -2,20 +2,15 @@ package com.edu.unbosque.Digital.FinServ.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import java.util.Date;
-import java.util.List;
-//import java.util.List;
 
 @Data
 @Entity
-@Getter
-@Setter
 @Table(name = "customers")
 public class CustomerModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id", nullable = false, updatable = false)
     private int customerId;
 
@@ -31,7 +26,6 @@ public class CustomerModel {
     @Column(name = "phone", length = 20)
     private String phone;
 
-
     @Column(name = "address", length = 255)
     private String address;
 
@@ -39,14 +33,8 @@ public class CustomerModel {
     @Temporal(TemporalType.DATE)
     private Date registrationDate;
 
-    @Column(name = "notification_preference_id")
-    private Integer notificationPreferenceId;
-
-    @Override
-    public String toString() {
-        return "CustomerModel [customerId=" + customerId + ", firstName=" + firstName + ", lastName=" + lastName + ", email="
-                + email + ", phone=" + phone + ", address=" + address + ", registrationDate=" + registrationDate
-                + "]";
-    }
+    @ManyToOne
+    @JoinColumn(name = "notification_preference_id", referencedColumnName = "preference_id")
+    private NotificationPreferencesModel notificationPreference;
 
 }

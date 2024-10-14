@@ -1,7 +1,7 @@
 package com.edu.unbosque.Digital.FinServ.Service;
 
-import com.edu.unbosque.Digital.FinServ.Model.Notification_PreferencesModel;
-import com.edu.unbosque.Digital.FinServ.Repository.Notification_PreferencesRepository;
+import com.edu.unbosque.Digital.FinServ.Model.NotificationPreferencesModel;
+import com.edu.unbosque.Digital.FinServ.Repository.NotificationPreferencesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
  * Service class for managing notification preferences.
  */
 @Service
-public class Notification_PreferencesService {
+public class NotificationPreferencesService {
 
     @Autowired
-    private Notification_PreferencesRepository notification_PreferencesRepository;
+    private NotificationPreferencesRepository notificationPreferencesRepository;
 
     /**
      * Creates a new notification preference.
@@ -20,8 +20,8 @@ public class Notification_PreferencesService {
      * @param notification_Preferences the notification preference to create
      * @return the created notification preference
      */
-    public Notification_PreferencesModel createNotification_Preferences(Notification_PreferencesModel notification_Preferences) {
-        return notification_PreferencesRepository.save(notification_Preferences);
+    public NotificationPreferencesModel createNotification_Preferences(NotificationPreferencesModel notification_Preferences) {
+        return notificationPreferencesRepository.save(notification_Preferences);
     }
 
     /**
@@ -30,8 +30,8 @@ public class Notification_PreferencesService {
      * @param id the ID of the notification preference
      * @return the notification preference if found, or null if not found
      */
-    public Notification_PreferencesModel getNotification_PreferencesById(int id) {
-        return notification_PreferencesRepository.findById(id).orElse(null);
+    public NotificationPreferencesModel getNotification_PreferencesById(int id) {
+        return notificationPreferencesRepository.findById(id).orElse(null);
     }
 
     /**
@@ -39,8 +39,8 @@ public class Notification_PreferencesService {
      *
      * @return an iterable of all notification preferences
      */
-    public Iterable<Notification_PreferencesModel> getAllNotification_Preferences() {
-        return notification_PreferencesRepository.findAll();
+    public Iterable<NotificationPreferencesModel> getAllNotification_Preferences() {
+        return notificationPreferencesRepository.findAll();
     }
 
     /**
@@ -51,10 +51,10 @@ public class Notification_PreferencesService {
      * @return the updated notification preference
      * @throws RuntimeException if the notification preference with the specified ID is not found
      */
-    public Notification_PreferencesModel updateNotification_Preferences(int id, Notification_PreferencesModel notification_Preferences) {
-        if (notification_PreferencesRepository.existsById(id)) {
+    public NotificationPreferencesModel updateNotification_Preferences(int id, NotificationPreferencesModel notification_Preferences) {
+        if (notificationPreferencesRepository.existsById(id)) {
             notification_Preferences.setPreferenceId(id);
-            return notification_PreferencesRepository.save(notification_Preferences);
+            return notificationPreferencesRepository.save(notification_Preferences);
         } else {
             throw new RuntimeException("Notification_Preferences not found with id " + id);
         }
@@ -67,8 +67,8 @@ public class Notification_PreferencesService {
      * @throws RuntimeException if the notification preference with the specified ID is not found
      */
     public void deleteNotification_Preferences(int id) {
-        if (notification_PreferencesRepository.existsById(id)) {
-            notification_PreferencesRepository.deleteById(id);
+        if (notificationPreferencesRepository.existsById(id)) {
+            notificationPreferencesRepository.deleteById(id);
         } else {
             throw new RuntimeException("Notification_Preferences not found with id " + id);
         }

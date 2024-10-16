@@ -10,7 +10,6 @@ import java.util.Date;
 public class CustomerModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id", nullable = false, updatable = false)
     private int customerId;
 
@@ -33,8 +32,7 @@ public class CustomerModel {
     @Temporal(TemporalType.DATE)
     private Date registrationDate;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "notification_preference_id", referencedColumnName = "preference_id")
     private NotificationPreferencesModel notificationPreference;
-
 }

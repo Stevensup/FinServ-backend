@@ -10,7 +10,6 @@ import lombok.Data;
 public class NotificationPreferencesModel {
 
     @Id
-    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "preference_id", nullable = false, updatable = false)
     private int preferenceId;

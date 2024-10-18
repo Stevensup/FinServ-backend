@@ -18,17 +18,17 @@ public class Customer_ProductsModel {
     @Column(name = "customer_product_id", nullable = false, updatable = false)
     private int customerProductId;
 
-    @Column(name = "customer_id", nullable = false, updatable = false)
+    @Column(name = "customer_id", nullable = false, updatable = true)
     private int customerId;
 
-    @Column(name = "product_id", nullable = false, updatable = false)
+    @Column(name = "product_id", nullable = false, updatable = true)
     private int productId;
 
     @Column(name = "acquisition_date", nullable = false, updatable = false)
     private Date acquisitionDate;  
 
     @Enumerated(EnumType.STRING) //  O EnumType.
-    @Column(name = "product_status", nullable = false, updatable = false)
+    @Column(name = "product_status", nullable = false, updatable = true)
     private ProductStatus productStatus;
 
     public enum ProductStatus {

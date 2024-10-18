@@ -12,21 +12,21 @@ import java.util.Optional;
 @Service
 public class Credit_CardService {
 
-    @Autowired
+    @Autowired //Insertar nuestra credit_cardRepository
     private Credit_CardRepository credit_cardRepository;
 
     public Credit_CardModel createCredit_Card(Credit_CardModel credit_card) {
         return credit_cardRepository.save(credit_card);        
     }     
-
+    //find a credit_card
     public Optional<Credit_CardModel> getCreditCardById(int id) {
         return credit_cardRepository.findById(id);
     }
-
+    //show all credit_card
     public List<Credit_CardModel> getAllCreditCards() {
         return credit_cardRepository.findAll();
     }
-
+    //save credit_card
     public Credit_CardModel updateCreditCard(int id, Credit_CardModel credit_card) {
         if(credit_cardRepository.existsById(id)) {
             credit_card.setIdCreditCard(id);
@@ -35,7 +35,7 @@ public class Credit_CardService {
             throw new RuntimeException("Credit Card not found with id " + id);
         }       
     }
-
+    //delete credit_card
     public void deleteCreditCard(int id) {
         if(credit_cardRepository.existsById(id)) {
             credit_cardRepository.deleteById(id);

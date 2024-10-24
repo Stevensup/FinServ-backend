@@ -32,6 +32,12 @@ public class CustomerModel {
     @Temporal(TemporalType.DATE)
     private Date registrationDate;
 
+    @Column(name = "username", nullable = false, unique = true, length = 255)
+    private String username;
+
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "notification_preference_id", referencedColumnName = "preference_id")
     private NotificationPreferencesModel notificationPreference;

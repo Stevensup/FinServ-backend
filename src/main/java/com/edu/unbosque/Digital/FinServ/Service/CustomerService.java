@@ -21,11 +21,37 @@ public class CustomerService {
 
     public CustomerModel createCustomer(CustomerModel customer) {
         NotificationPreferencesModel notificationPreference = customer.getNotificationPreference();
-        if (notificationPreference != null && notificationPreference.getPreferenceId() == 0) {
-            notificationPreferencesRepository.save(notificationPreference);
+
+        if (notificationPreference != null) {
+
+            if (notificationPreference.getPreferenceId() == 0) {
+                Optional<NotificationPreferencesModel> existingPreference =
+                        notificationPreferencesRepository.findByPreferenceName(notificationPreference.getPreferenceName());
+
+
+                if (existingPreference.isPresent()) {
+                    customer.setNotificationPreference(existingPreference.get());
+                } else {
+
+                    notificationPreferencesRepository.save(notificationPreference);
+                }
+            } else {
+
+                Optional<NotificationPreferencesModel> existingPreference =
+                        notificationPreferencesRepository.findById(notificationPreference.getPreferenceId());
+
+                if (existingPreference.isPresent()) {
+                    customer.setNotificationPreference(existingPreference.get());
+                }
+            }
         }
+
+        customer.setUsername(customer.getEmail());
+        
         return customerRepository.save(customer);
     }
+
+
 
     public Optional<CustomerModel> getCustomerById(int id) {
         return customerRepository.findById(id);

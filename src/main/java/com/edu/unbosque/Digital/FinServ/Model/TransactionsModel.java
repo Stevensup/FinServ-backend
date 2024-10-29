@@ -14,16 +14,17 @@ import java.util.Date;
 public class TransactionsModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "transaction_id", nullable = false, updatable = false)
     private int transactionId;
 
-    @Column(name = "customer_id", nullable = false)
+    @Column(name = "customer_id", nullable = false, insertable = false, updatable = false)
     private int customerId;
 
-    @Column(name = "product_id", nullable = false)
+    @Column(name = "product_id", nullable = false, insertable = false, updatable = false)
     private int productId;
 
-    @Column(name = "transaction_type_id", nullable = false)
+    @Column(name = "transaction_type_id", nullable = false, insertable = false, updatable = false)
     private int transactionTypeId;
 
     @Column(name = "amount", nullable = false)
@@ -33,18 +34,15 @@ public class TransactionsModel {
     @Temporal(TemporalType.TIMESTAMP)
     private Date transactionDate;
 
-    // Relaciones con las tablas: Customers, Financial_Products y Transaction_Types (Verificadas)
-
     @ManyToOne
-    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+    @JoinColumn(name = "customer_id", nullable = false)
     private CustomerModel customer;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", insertable = false, updatable = false)
+    @JoinColumn(name = "product_id", nullable = false)
     private Financial_ProductsModel product;
 
     @ManyToOne
-    @JoinColumn(name = "transaction_type_id", insertable = false, updatable = false)
+    @JoinColumn(name = "transaction_type_id", nullable = false)
     private Transaction_TypesModel transactionType;
-
 }

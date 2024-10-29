@@ -10,7 +10,6 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-
 @Table(name = "customer_products")
 public class Customer_ProductsModel {
 
@@ -18,17 +17,17 @@ public class Customer_ProductsModel {
     @Column(name = "customer_product_id", nullable = false, updatable = false)
     private int customerProductId;
 
-    @Column(name = "customer_id", nullable = false, updatable = true)
+    @Column(name = "customer_id", nullable = false, insertable = false, updatable = false)
     private int customerId;
 
-    @Column(name = "product_id", nullable = false, updatable = true)
+    @Column(name = "product_id", nullable = false, insertable = false, updatable = false)
     private int productId;
 
     @Column(name = "acquisition_date", nullable = false, updatable = false)
-    private Date acquisitionDate;  
+    private Date acquisitionDate;
 
-    @Enumerated(EnumType.STRING) //  O EnumType.
-    @Column(name = "product_status", nullable = false, updatable = true)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "product_status", nullable = false, updatable = false)
     private ProductStatus productStatus;
 
     public enum ProductStatus {
@@ -36,18 +35,18 @@ public class Customer_ProductsModel {
         INACTIVE
     }
 
-    // @ManyToOne
-    // @JoinColumn(name = "customer_product_id")
-    // private Customer_ProductsModel customerProductsModel;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private CustomerModel customer;
 
-    // @ManyToOne
-    // @JoinColumn(name = "product_id")
-    // private Financial_ProductsModel financialProductsModel;
-
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    private Financial_ProductsModel financialProduct;
 
     @Override
     public String toString() {
-        return "Customer_ProductsModel [customerProductId=" + customerProductId + ", customerId=" + customerId + ", productId=" + productId + ", acquisitionDate=" + acquisitionDate + ", productStatus=" + productStatus + "]";
-    
+        return "Customer_ProductsModel [customerProductId=" + customerProductId + ", customerId=" + customerId +
+                ", productId=" + productId + ", acquisitionDate=" + acquisitionDate + ", productStatus=" + productStatus
+                + "]";
     }
 }

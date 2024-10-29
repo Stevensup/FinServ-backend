@@ -18,17 +18,14 @@ public class Transaction_LogsModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int logId;
 
-    @Column(name = "transaction_id", nullable = false)
+    @Column(name = "transaction_id", nullable = false, insertable = false, updatable = false)
     private int transactionId;
 
     @Column(name = "log_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date logDate = new Date();
 
-    // Relación con la tabla: Transactions (Verificada)
-
     @ManyToOne
-    @JoinColumn(name = "transaction_id", insertable = false, updatable = false)
+    @JoinColumn(name = "transaction_id", nullable = false)
     private TransactionsModel transaction;
-
 }

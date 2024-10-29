@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.List;
 
 @Data
 @Entity
@@ -19,8 +20,6 @@ public class Transaction_TypesModel {
     @Column(name = "transaction_name", nullable = false, length = 50)
     private String transactionName;
 
-    // Relación inversa con la tabla Transactions: Uno a muchos. (Pendiente revisar con el equipo si se va a usar, de manera que un tipo de transacción puede estar asociado con varias transacciones)
-
-    // @OneToMany(mappedBy = "transactionType")
-    // private List<TransactionsModel> transactions;
+    @OneToMany(mappedBy = "transactionType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<TransactionsModel> transactions;
 }

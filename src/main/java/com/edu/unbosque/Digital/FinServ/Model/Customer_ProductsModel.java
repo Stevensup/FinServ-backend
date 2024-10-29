@@ -46,7 +46,6 @@ public class Customer_ProductsModel {
     @Override
     public String toString() {
         return "Customer_ProductsModel [customerProductId=" + customerProductId + ", customerId=" + customerId +
-                ", productId=" + productId + ", acquisitionDate=" + acquisitionDate + ", productStatus=" + productStatus
-                + "]";
+                ", productId=" + productId + ", acquisitionDate=" + acquisitionDate + ", productStatus=" + productStatus + "]";
     }
 }

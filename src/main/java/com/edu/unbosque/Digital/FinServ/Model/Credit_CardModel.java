@@ -1,54 +1,45 @@
 package com.edu.unbosque.Digital.FinServ.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
 import java.util.Date;
 
 @Data
 @Entity
-@Getter
-@Setter
 @Table(name = "credit_card")
 public class Credit_CardModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idCreditCard", nullable = false, updatable = false)
     private int idCreditCard;
 
-    @Column(name = "customer_id", nullable = false, insertable = false, updatable = false)
+    @Column(name = "customer_id", nullable = false)
     private int customerId;
 
-    @Column(name = "product_id", nullable = false, insertable = false, updatable = false)
+    @Column(name = "product_id", nullable = false)
     private int productId;
 
-    @Column(name = "creditLimit", nullable = false, updatable = false)
+    @Column(name = "creditLimit", nullable = false)
     private double creditLimit;
 
-    @Column(name = "availableBalance", nullable = false, updatable = false)
+    @Column(name = "availableBalance")
     private double availableBalance;
 
-    @Column(name = "expirationDate", nullable = false, updatable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @Column(name = "expirationDate", nullable = false)
     private Date expirationDate;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
+    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+    @JsonIgnore
     private CustomerModel customer;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
+    @JsonIgnore
     private Financial_ProductsModel financialProduct;
-
-    @Override
-    public String toString() {
-        return "Credit_CardModel{" +
-                "idCreditCard=" + idCreditCard +
-                ", customerId=" + customerId +
-                ", productId=" + productId +
-                ", creditLimit=" + creditLimit +
-                ", availableBalance=" + availableBalance +
-                ", expirationDate=" + expirationDate +
-                '}';
-    }
 }

@@ -4,76 +4,83 @@ import com.edu.unbosque.Digital.FinServ.Model.Credit_CardModel;
 import com.edu.unbosque.Digital.FinServ.Repository.Credit_CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
-/**
- * Service class for managing credit cards.
- */
 @Service
 public class Credit_CardService {
 
     @Autowired
-    private Credit_CardRepository credit_cardRepository;
+    private Credit_CardRepository creditCardRepository;
 
     /**
-     * Creates a new credit card.
+     * Crea una nueva tarjeta de crédito con un límite de crédito aleatorio.
      *
-     * @param credit_card the credit card to create
-     * @return the created credit card
+     * @param creditCard el modelo de la tarjeta de crédito a crear
+     * @return la tarjeta de crédito creada
      */
-    public Credit_CardModel createCredit_Card(Credit_CardModel credit_card) {
-        return credit_cardRepository.save(credit_card);
+    @Transactional
+    public Credit_CardModel createCreditCard(Credit_CardModel creditCard) {
+        // Generar un límite de crédito aleatorio entre 1000 y 10000
+        double randomCreditLimit = 1000 + new Random().nextInt(9000);
+        creditCard.setCreditLimit(randomCreditLimit);
+        creditCard.setAvailableBalance(randomCreditLimit); // El balance es igual al límite de crédito
+        creditCard.setExpirationDate(new Date()); // Ajusta la fecha de expiración según sea necesario
+
+        return creditCardRepository.save(creditCard);
     }
 
     /**
-     * Retrieves a credit card by its ID.
+     * Obtiene todas las tarjetas de crédito de un cliente específico.
      *
-     * @param id the ID of the credit card
-     * @return an Optional containing the credit card if found, or empty if not found
+     * @param customerId el ID del cliente
+     * @return una lista de tarjetas de crédito asociadas al cliente
+     */
+    public List<Credit_CardModel> getCreditCardsByCustomerId(int customerId) {
+        return creditCardRepository.findByCustomerId(customerId);
+    }
+
+    /**
+     * Obtiene una tarjeta de crédito por su ID.
+     *
+     * @param id el ID de la tarjeta de crédito
+     * @return la tarjeta de crédito, si existe
      */
     public Optional<Credit_CardModel> getCreditCardById(int id) {
-        return credit_cardRepository.findById(id);
+        return creditCardRepository.findById(id);
     }
 
     /**
-     * Retrieves all credit cards.
+     * Actualiza el límite de crédito de una tarjeta existente y ajusta el balance disponible.
      *
-     * @return a list of all credit cards
+     * @param cardId el ID de la tarjeta de crédito
+     * @param newCreditLimit el nuevo límite de crédito
+     * @return la tarjeta de crédito actualizada
      */
-    public List<Credit_CardModel> getAllCreditCards() {
-        return credit_cardRepository.findAll();
+    @Transactional
+    public Credit_CardModel updateCreditCard(int cardId, double newCreditLimit) {
+        Credit_CardModel existingCard = creditCardRepository.findById(cardId)
+                .orElseThrow(() -> new RuntimeException("Credit card not found with id " + cardId));
+
+        existingCard.setCreditLimit(newCreditLimit);
+        existingCard.setAvailableBalance(newCreditLimit); // Actualizar el balance al nuevo límite de crédito
+        return creditCardRepository.save(existingCard);
     }
 
     /**
-     * Updates an existing credit card.
+     * Elimina una tarjeta de crédito por su ID.
      *
-     * @param id the ID of the credit card to update
-     * @param credit_card the updated credit card data
-     * @return the updated credit card
-     * @throws RuntimeException if the credit card with the specified ID is not found
+     * @param cardId el ID de la tarjeta de crédito a eliminar
      */
-    public Credit_CardModel updateCreditCard(int id, Credit_CardModel credit_card) {
-        if(credit_cardRepository.existsById(id)) {
-            credit_card.setIdCreditCard(id);
-            return credit_cardRepository.save(credit_card);
-        } else {
-            throw new RuntimeException("Credit Card not found with id " + id);
-        }
-    }
+    @Transactional
+    public void deleteCreditCard(int cardId) {
+        Credit_CardModel existingCard = creditCardRepository.findById(cardId)
+                .orElseThrow(() -> new RuntimeException("Credit card not found with id " + cardId));
 
-    /**
-     * Deletes a credit card by its ID.
-     *
-     * @param id the ID of the credit card to delete
-     * @throws RuntimeException if the credit card with the specified ID is not found
-     */
-    public void deleteCreditCard(int id) {
-        if(credit_cardRepository.existsById(id)) {
-            credit_cardRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("Credit Card not found with id " + id);
-        }
+        creditCardRepository.delete(existingCard);
     }
 }

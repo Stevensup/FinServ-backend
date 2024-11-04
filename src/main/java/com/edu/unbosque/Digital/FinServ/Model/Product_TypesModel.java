@@ -2,25 +2,22 @@ package com.edu.unbosque.Digital.FinServ.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import java.util.List;
 
 @Data
-@Getter
-@Setter
 @Entity
 @Table(name = "product_types")
 public class Product_TypesModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_type_id", nullable = false, updatable = false)
     private int productTypeId;
 
-    @Column(name = "type_name", nullable = false, length = 50)
+    @Column(name = "type_name", nullable = false)
     private String typeName;
 
-    @OneToMany(mappedBy = "productType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "productType")
     private List<Financial_ProductsModel> financialProducts;
 
     @Override

@@ -9,5 +9,4 @@ import java.util.List;
 @Repository
 public interface InsurancePoliciesRepository extends JpaRepository<InsurancePoliciesModel, Integer> {
     List<InsurancePoliciesModel> findByCustomerId(int customerId);
-    List<InsurancePoliciesModel> findByPolicyStatus(InsurancePoliciesModel.PolicyStatus policyStatus);
 }

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = { "http://localhost:8090", "http://localhost:8080", "*" })
 @RestController
@@ -22,9 +23,17 @@ public class InsurancePoliciesController {
     @PostMapping("/create")
     @Operation(summary = "Create a new Insurance Policy", description = "Create a new insurance policy for a customer")
     @ApiResponse(responseCode = "200", description = "Insurance policy created")
-    public ResponseEntity<?> createInsurancePolicy(@RequestBody InsurancePoliciesModel insurancePolicy) {
+    public ResponseEntity<?> createInsurancePolicy(@RequestBody Map<String, Object> payload) {
         try {
-            InsurancePoliciesModel createdPolicy = insurancePoliciesService.createInsurancePolicy(insurancePolicy);
+            int customerId = (int) payload.get("customerId");
+            int productId = (int) payload.get("productId");
+            String productTypeName = (String) payload.get("productTypeName");
+
+            InsurancePoliciesModel insurancePolicy = new InsurancePoliciesModel();
+            insurancePolicy.setCustomerId(customerId);
+            insurancePolicy.setProductId(productId);
+
+            InsurancePoliciesModel createdPolicy = insurancePoliciesService.createInsurancePolicy(insurancePolicy, productTypeName);
             return ResponseEntity.ok(createdPolicy);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

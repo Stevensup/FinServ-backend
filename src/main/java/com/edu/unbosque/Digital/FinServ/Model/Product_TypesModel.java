@@ -1,5 +1,6 @@
 package com.edu.unbosque.Digital.FinServ.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.List;
@@ -18,6 +19,7 @@ public class Product_TypesModel {
     private String typeName;
 
     @OneToMany(mappedBy = "productType")
+    @JsonIgnore
     private List<Financial_ProductsModel> financialProducts;
 
     @Override

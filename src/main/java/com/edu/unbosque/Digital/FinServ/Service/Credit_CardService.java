@@ -28,33 +28,34 @@ public class Credit_CardService {
     private CustomerRepository customerRepository;
 
     /**
-     * Crea una nueva tarjeta de crédito con un límite de crédito aleatorio.
+     * Crea una nueva tarjeta de crédito para un cliente.
      *
      * @param creditCard el modelo de la tarjeta de crédito a crear
+     * @param productTypeName el nombre del tipo de producto seleccionado por el cliente
      * @return la tarjeta de crédito creada
      */
     @Transactional
-    public Credit_CardModel createCreditCard(Credit_CardModel creditCard) {
+    public Credit_CardModel createCreditCard(Credit_CardModel creditCard, String productTypeName) {
         try {
             // Verificar si el cliente existe
             if (!customerRepository.existsById(creditCard.getCustomerId())) {
                 throw new RuntimeException("Customer with ID " + creditCard.getCustomerId() + " does not exist.");
             }
 
-            // Paso 1: Obtener el objeto Product_TypesModel para el tipo de producto "Tarjeta de credito"
-            Product_TypesModel productType = productTypesRepository.findByTypeName("Tarjeta de credito")
-                    .orElseThrow(() -> new RuntimeException("Tipo de producto 'Tarjeta de credito' no encontrado"));
+            // Obtener el tipo de producto a partir del nombre proporcionado
+            Product_TypesModel productType = productTypesRepository.findByTypeName(productTypeName)
+                    .orElseThrow(() -> new RuntimeException("Tipo de producto '" + productTypeName + "' no encontrado"));
 
-            // Paso 2: Crear el producto financiero asociado
+            // Crear el producto financiero asociado
             Financial_ProductsModel financialProduct = new Financial_ProductsModel();
-            financialProduct.setProductName("Tarjeta de Crédito " + (creditCard.getIdCreditCard() + 1));
+            financialProduct.setProductName("Tarjeta de Crédito - " + productTypeName);
             financialProduct.setProductType(productType);
-            financialProduct.setDescription("Tarjeta de crédito bancaria con beneficios y límites personalizados.");
+            financialProduct.setDescription("Descripción de la tarjeta de crédito para el tipo " + productTypeName);
             financialProduct.setInterestRate(0.0);
             financialProduct.setCreditLimit(creditCard.getCreditLimit());
             Financial_ProductsModel savedFinancialProduct = financialProductsRepository.save(financialProduct);
 
-            // Paso 3: Crear la relación en customer_products
+            // Crear la relación en customer_products
             Customer_ProductsModel customerProduct = new Customer_ProductsModel();
             customerProduct.setCustomerId(creditCard.getCustomerId());
             customerProduct.setProductId(savedFinancialProduct.getProductId());
@@ -62,65 +63,13 @@ public class Credit_CardService {
             customerProduct.setProductStatus(Customer_ProductsModel.ProductStatus.ACTIVE);
             customerProductsRepository.save(customerProduct);
 
-            // Paso 4: Asignar el productId al modelo de tarjeta de crédito y guardarlo
+            // Asignar el productId al modelo de tarjeta de crédito y guardarlo
             creditCard.setProductId(savedFinancialProduct.getProductId());
+
             return creditCardRepository.save(creditCard);
 
         } catch (Exception e) {
             throw new RuntimeException("Error creating credit card: " + e.getMessage());
         }
-    }
-
-    /**
-     * Elimina una tarjeta de crédito por su ID.
-     *
-     * @param idCreditCard el ID de la tarjeta de crédito a eliminar
-     */
-    @Transactional
-    public void deleteCreditCard(int idCreditCard) {
-        Credit_CardModel creditCard = creditCardRepository.findById(idCreditCard)
-                .orElseThrow(() -> new RuntimeException("Credit card not found with id " + idCreditCard));
-
-        creditCardRepository.delete(creditCard);
-        customerProductsRepository.deleteAll(customerProductsRepository.findByProductId(creditCard.getProductId()));
-        financialProductsRepository.deleteById(creditCard.getProductId());
-    }
-
-    /**
-     * Obtiene todas las tarjetas de crédito de un cliente específico.
-     *
-     * @param customerId el ID del cliente
-     * @return una lista de tarjetas de crédito asociadas al cliente
-     */
-    public List<Credit_CardModel> getCreditCardsByCustomerId(int customerId) {
-        return creditCardRepository.findByCustomerId(customerId);
-    }
-
-    /**
-     * Obtiene una tarjeta de crédito por su ID.
-     *
-     * @param idCreditCard el ID de la tarjeta de crédito
-     * @return la tarjeta de crédito, si existe
-     */
-    public Credit_CardModel getCreditCardById(int idCreditCard) {
-        return creditCardRepository.findById(idCreditCard)
-                .orElseThrow(() -> new RuntimeException("Credit card not found with id " + idCreditCard));
-    }
-
-    /**
-     * Actualiza el límite de crédito de una tarjeta existente.
-     *
-     * @param idCreditCard el ID de la tarjeta de crédito
-     * @param newCreditLimit el nuevo límite de crédito
-     * @return la tarjeta de crédito actualizada
-     */
-    @Transactional
-    public Credit_CardModel updateCreditCard(int idCreditCard, double newCreditLimit) {
-        Credit_CardModel existingCard = creditCardRepository.findById(idCreditCard)
-                .orElseThrow(() -> new RuntimeException("Credit card not found with id " + idCreditCard));
-
-        existingCard.setCreditLimit(newCreditLimit);
-        existingCard.setAvailableBalance(newCreditLimit); // Ajustar el balance disponible al nuevo límite de crédito
-        return creditCardRepository.save(existingCard);
     }
 }

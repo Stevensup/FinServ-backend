@@ -31,6 +31,6 @@ public class InsurancePoliciesModel {
     private Date expirationDate;
 
     public enum PolicyStatus {
-        Activo, Caducado, Cancelado
+        Activo, Inactivo, Cancelado
     }
 }

@@ -48,10 +48,10 @@ public class Credit_CardService {
 
             // Crear el producto financiero asociado
             Financial_ProductsModel financialProduct = new Financial_ProductsModel();
-            financialProduct.setProductName("Tarjeta de Crédito - " + productTypeName);
+            financialProduct.setProductName(productTypeName);
             financialProduct.setProductType(productType);
-            financialProduct.setDescription("Descripción de la tarjeta de crédito para el tipo " + productTypeName);
-            financialProduct.setInterestRate(0.0);
+            financialProduct.setDescription(productTypeName);
+            financialProduct.setInterestRate(2);
             financialProduct.setCreditLimit(creditCard.getCreditLimit());
             Financial_ProductsModel savedFinancialProduct = financialProductsRepository.save(financialProduct);
 

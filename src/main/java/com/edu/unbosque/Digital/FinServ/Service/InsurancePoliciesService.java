@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -36,17 +34,20 @@ public class InsurancePoliciesService {
     @Transactional
     public InsurancePoliciesModel createInsurancePolicy(InsurancePoliciesModel insurancePolicy, String productTypeName) {
         try {
+            // Obtener el tipo de producto a partir del nombre proporcionado
             Product_TypesModel productType = productTypesRepository.findByTypeName(productTypeName)
                     .orElseThrow(() -> new RuntimeException("Tipo de producto '" + productTypeName + "' no encontrado"));
 
+            // Crear el producto financiero asociado
             Financial_ProductsModel financialProduct = new Financial_ProductsModel();
-            financialProduct.setProductName("Seguro " + insurancePolicy.getPolicyId() + 1);
+            financialProduct.setProductName( productTypeName);
             financialProduct.setProductType(productType);
-            financialProduct.setDescription("Descripción del seguro para el tipo " + productTypeName);
+            financialProduct.setDescription( productTypeName);
             financialProduct.setInterestRate(0.0);
             financialProduct.setCreditLimit(0.0);
             Financial_ProductsModel savedFinancialProduct = financialProductsRepository.save(financialProduct);
 
+            // Crear la relación en customer_products
             Customer_ProductsModel customerProduct = new Customer_ProductsModel();
             customerProduct.setCustomerId(insurancePolicy.getCustomerId());
             customerProduct.setProductId(savedFinancialProduct.getProductId());
@@ -54,12 +55,13 @@ public class InsurancePoliciesService {
             customerProduct.setProductStatus(Customer_ProductsModel.ProductStatus.ACTIVE);
             customerProductsRepository.save(customerProduct);
 
+            // Asignar el productId al modelo de póliza de seguro
             insurancePolicy.setProductId(savedFinancialProduct.getProductId());
 
+            // Establecer la fecha de expiración y el estado de la póliza
             Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.YEAR, 1);
+            calendar.add(Calendar.YEAR, 1);  // Añade un año
             insurancePolicy.setExpirationDate(calendar.getTime());
-
             insurancePolicy.setPolicyStatus(InsurancePoliciesModel.PolicyStatus.Activo);
 
             return insurancePoliciesRepository.save(insurancePolicy);
@@ -95,31 +97,42 @@ public class InsurancePoliciesService {
         financialProductsRepository.delete(financialProduct);
     }
 
-    /**
-     * Actualiza una póliza de seguro existente.
-     *
-     * @param policyId el ID de la póliza a actualizar
-     * @param policyDetails el modelo con los datos actualizados de la póliza
-     * @return la póliza de seguro actualizada
-     */
     @Transactional
-    public InsurancePoliciesModel updateInsurancePolicy(int policyId, InsurancePoliciesModel policyDetails) {
+    public InsurancePoliciesModel updatePolicyStatus(int policyId, String policyStatus) {
         InsurancePoliciesModel existingPolicy = insurancePoliciesRepository.findById(policyId)
                 .orElseThrow(() -> new RuntimeException("Policy not found with id " + policyId));
 
-        existingPolicy.setPolicyStatus(policyDetails.getPolicyStatus());
-        existingPolicy.setExpirationDate(policyDetails.getExpirationDate());
+        existingPolicy.setPolicyStatus(InsurancePoliciesModel.PolicyStatus.valueOf(policyStatus));
         return insurancePoliciesRepository.save(existingPolicy);
     }
 
+
     /**
-     * Obtiene todas las pólizas de seguro de un cliente específico.
+     * Obtiene los detalles de todas las pólizas de seguro de un cliente específico, incluyendo el nombre del producto, estado de la póliza y fecha de expiración.
      *
      * @param customerId el ID del cliente
-     * @return una lista de pólizas de seguro asociadas al cliente
+     * @return una lista de mapas que contienen los detalles de cada póliza de seguro
      */
-    public List<InsurancePoliciesModel> getPoliciesByCustomerId(int customerId) {
-        return insurancePoliciesRepository.findByCustomerId(customerId);
+    @Transactional(readOnly = true)
+    public List<Map<String, Object>> getPolicyDetailsByCustomerId(int customerId) {
+        List<InsurancePoliciesModel> policies = insurancePoliciesRepository.findByCustomerId(customerId);
+
+        List<Map<String, Object>> policyDetailsList = new ArrayList<>();
+
+        for (InsurancePoliciesModel policy : policies) {
+            Optional<Financial_ProductsModel> financialProductOpt = financialProductsRepository.findById(policy.getProductId());
+
+            if (financialProductOpt.isPresent()) {
+                Financial_ProductsModel financialProduct = financialProductOpt.get();
+                Map<String, Object> policyDetails = new HashMap<>();
+                policyDetails.put("policyId", policy.getPolicyId());
+                policyDetails.put("productName", financialProduct.getProductName());
+                policyDetails.put("policyStatus", policy.getPolicyStatus());
+                policyDetails.put("expirationDate", policy.getExpirationDate());
+                policyDetailsList.add(policyDetails);
+            }
+        }
+        return policyDetailsList;
     }
 
 }

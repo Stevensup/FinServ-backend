@@ -26,12 +26,10 @@ public class InsurancePoliciesController {
     public ResponseEntity<?> createInsurancePolicy(@RequestBody Map<String, Object> payload) {
         try {
             int customerId = (int) payload.get("customerId");
-            int productId = (int) payload.get("productId");
             String productTypeName = (String) payload.get("productTypeName");
 
             InsurancePoliciesModel insurancePolicy = new InsurancePoliciesModel();
             insurancePolicy.setCustomerId(customerId);
-            insurancePolicy.setProductId(productId);
 
             InsurancePoliciesModel createdPolicy = insurancePoliciesService.createInsurancePolicy(insurancePolicy, productTypeName);
             return ResponseEntity.ok(createdPolicy);
@@ -41,26 +39,16 @@ public class InsurancePoliciesController {
         }
     }
 
-    @GetMapping("/findByCustomer/{customerId}")
-    @Operation(summary = "Get Insurance Policies by Customer ID", description = "Get all insurance policies associated with a customer")
-    @ApiResponse(responseCode = "200", description = "Insurance policies retrieved")
-    public ResponseEntity<?> getPoliciesByCustomerId(@PathVariable int customerId) {
-        List<InsurancePoliciesModel> policies = insurancePoliciesService.getPoliciesByCustomerId(customerId);
-        return policies.isEmpty() ?
-                ResponseEntity.status(HttpStatus.NOT_FOUND).body("No policies found for customer ID: " + customerId) :
-                ResponseEntity.ok(policies);
-    }
 
-    @PutMapping("/update/{policyId}")
-    @Operation(summary = "Update an Insurance Policy", description = "Update an existing insurance policy")
-    @ApiResponse(responseCode = "200", description = "Insurance policy updated")
-    public ResponseEntity<?> updateInsurancePolicy(@PathVariable int policyId, @RequestBody InsurancePoliciesModel policyDetails) {
+    @PutMapping("/updateStatus/{policyId}")
+    public ResponseEntity<?> updatePolicyStatus(@PathVariable int policyId, @RequestBody Map<String, Object> policyDetails) {
         try {
-            InsurancePoliciesModel updatedPolicy = insurancePoliciesService.updateInsurancePolicy(policyId, policyDetails);
+            String policyStatus = (String) policyDetails.get("policyStatus");
+
+            InsurancePoliciesModel updatedPolicy = insurancePoliciesService.updatePolicyStatus(policyId, policyStatus);
             return ResponseEntity.ok(updatedPolicy);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Error updating policy: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error updating policy status: " + e.getMessage());
         }
     }
 
@@ -76,4 +64,15 @@ public class InsurancePoliciesController {
                     .body("Error deleting policy: " + e.getMessage());
         }
     }
+
+    @GetMapping("/detailsByCustomer/{customerId}")
+    @Operation(summary = "Get Insurance Policy Details by Customer ID", description = "Get insurance policy details including product name, policy status, and expiration date")
+    @ApiResponse(responseCode = "200", description = "Insurance policy details retrieved")
+    public ResponseEntity<?> getPolicyDetailsByCustomerId(@PathVariable int customerId) {
+        List<Map<String, Object>> policyDetails = insurancePoliciesService.getPolicyDetailsByCustomerId(customerId);
+        return policyDetails.isEmpty() ?
+                ResponseEntity.status(HttpStatus.NOT_FOUND).body("No policies found for customer ID: " + customerId) :
+                ResponseEntity.ok(policyDetails);
+    }
+
 }

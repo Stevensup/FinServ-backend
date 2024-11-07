@@ -8,95 +8,82 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
 import java.util.Optional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @Transactional
 @CrossOrigin(
-    origins = {"http://localhost:8090", "http://localhost:8080", "*"}
+        origins = {"http://localhost:8090", "http://localhost:8080", "*"}
 )
 @RestController
-@RequestMapping("/CustomerProducts") 
-
+@RequestMapping("/CustomerProducts")
 public class Customer_ProductsController {
- 
+
     @Autowired
     private Customer_ProductsService customer_productsService;
 
     @PostMapping("/create")
     @Operation(
-        summary = "Create a new Customer_Products", 
-        description = "Create a new Customer_Products"
+            summary = "Create a new Customer_Products",
+            description = "Create a new Customer_Products"
     )
-
     @ApiResponse(
-        responseCode = "200", 
-        description = "Customer_Products created successfully"
+            responseCode = "200",
+            description = "Customer_Products created successfully"
     )
-
     public Customer_ProductsModel createCustomerProducts(@RequestBody Customer_ProductsModel customer_products) {
-        return customer_productsService.createCustomer_products(customer_products);
+        return customer_productsService.createCustomer_Products(customer_products);
     }
 
-    @PostMapping({"/{id}"})
+    @GetMapping("/{id}")
     @Operation(
-        summary = "Get a Customer_Products by ID",
-        description = "Get a Customer_Products by ID"
-
+            summary = "Get a Customer_Products by ID",
+            description = "Get a Customer_Products by ID"
     )
     @ApiResponse(
-        responseCode = "200", 
-        description = "Customer_Products found"
+            responseCode = "200",
+            description = "Customer_Products found"
     )
-
     public Optional<Customer_ProductsModel> getCustomerProductsById(@PathVariable int id) {
         return customer_productsService.getCustomerProductsById(id);
     }
 
-    @PostMapping({"/all"})
+    @GetMapping("/all")
     @Operation(
-        summary = "Get all Customer_Products",
-        description = "Get all Customer_Products"
+            summary = "Get all Customer_Products",
+            description = "Get all Customer_Products"
     )
-
     @ApiResponse(
-        responseCode = "200",
-        description = "Customer_Products retrieved"
+            responseCode = "200",
+            description = "Customer_Products retrieved"
     )
-
     public List<Customer_ProductsModel> getAllCustomerProducts() {
         return customer_productsService.getAllCustomerProducts();
     }
 
-    @PostMapping({"/update/{id}"})
+    @PutMapping("/update/{id}")
     @Operation(
-        summary = "Update a Customer_Products",
-        description = "Update a Customer_Products"
+            summary = "Update a Customer_Products",
+            description = "Update a Customer_Products"
     )
     @ApiResponse(
-        responseCode = "200", 
-        description = "Customer_Products updated"
-    ) 
-
+            responseCode = "200",
+            description = "Customer_Products updated"
+    )
     public Customer_ProductsModel updateCustomerProducts(@PathVariable int id, @RequestBody Customer_ProductsModel customer_products) {
         return customer_productsService.updateCustomerProducts(id, customer_products);
     }
 
-    @PostMapping({"/delete/{id}"})
+    @DeleteMapping("/delete/{id}")
     @Operation(
-        summary = "Delete a Customer_Products",
-        description = "Delete a Customer_Products"
+            summary = "Delete a Customer_Products",
+            description = "Delete a Customer_Products"
     )
     @ApiResponse(
-        responseCode = "200",
-        description = "Customer_Products deleted"
+            responseCode = "200",
+            description = "Customer_Products deleted"
     )
-
     public void deleteCustomerProducts(@PathVariable int id) {
         customer_productsService.deleteCustomerProducts(id);
-    }    
+    }
 }

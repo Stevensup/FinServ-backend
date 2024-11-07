@@ -12,15 +12,17 @@ import java.util.Date;
 @Setter
 @Table(name = "notifications")
 public class NotificationsModel {
-    
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "notification_id", nullable = false, updatable = false)
     private int notificationId;
 
-    @Column(name = "customer_id", nullable = false, updatable = false)
-    private int customerId;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private CustomerModel customerId;
 
-    @Column(name = "notification_preference_id", nullable = false, updatable = false)
+    @Column(name = "notification_preference_id", nullable = false)
     private int notificationPreferenceId;
 
     @Column(name = "message", nullable = false, length = 100)
@@ -30,18 +32,10 @@ public class NotificationsModel {
     @Temporal(TemporalType.DATE)
     private Date sendDate;
 
-//    @ManyToOne
-//    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
-//    private  Customer customer;
-
-//    @ManyToOne
-//    @JoinColumn(name = "preference_id", insertable = false, updatable = false)
-//    private  NotificationPreference notificationPreference;
-
     @Override
     public String toString(){
         return "NotificationsModel [notificationId=" + notificationId + ", customerId=" + customerId + ",notificationPreferenceId="
-        + notificationPreferenceId +", message="+ message +",sendDate= "+ sendDate
-        +"]";
+                + notificationPreferenceId +", message="+ message +",sendDate= "+ sendDate
+                +"]";
     }
 }

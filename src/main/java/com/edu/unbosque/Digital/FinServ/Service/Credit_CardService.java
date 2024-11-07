@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class Credit_CardService {
@@ -37,16 +39,13 @@ public class Credit_CardService {
     @Transactional
     public Credit_CardModel createCreditCard(Credit_CardModel creditCard, String productTypeName) {
         try {
-            // Verificar si el cliente existe
             if (!customerRepository.existsById(creditCard.getCustomerId())) {
                 throw new RuntimeException("Customer with ID " + creditCard.getCustomerId() + " does not exist.");
             }
 
-            // Obtener el tipo de producto a partir del nombre proporcionado
             Product_TypesModel productType = productTypesRepository.findByTypeName(productTypeName)
                     .orElseThrow(() -> new RuntimeException("Tipo de producto '" + productTypeName + "' no encontrado"));
 
-            // Crear el producto financiero asociado
             Financial_ProductsModel financialProduct = new Financial_ProductsModel();
             financialProduct.setProductName(productTypeName);
             financialProduct.setProductType(productType);
@@ -55,7 +54,6 @@ public class Credit_CardService {
             financialProduct.setCreditLimit(creditCard.getCreditLimit());
             Financial_ProductsModel savedFinancialProduct = financialProductsRepository.save(financialProduct);
 
-            // Crear la relación en customer_products
             Customer_ProductsModel customerProduct = new Customer_ProductsModel();
             customerProduct.setCustomerId(creditCard.getCustomerId());
             customerProduct.setProductId(savedFinancialProduct.getProductId());
@@ -63,13 +61,50 @@ public class Credit_CardService {
             customerProduct.setProductStatus(Customer_ProductsModel.ProductStatus.ACTIVE);
             customerProductsRepository.save(customerProduct);
 
-            // Asignar el productId al modelo de tarjeta de crédito y guardarlo
             creditCard.setProductId(savedFinancialProduct.getProductId());
 
             return creditCardRepository.save(creditCard);
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException("Error creating credit card: " + e.getMessage());
         }
     }
+
+    @Transactional
+    public Credit_CardModel updateCreditLimit(int cardId, double newCreditLimit) {
+        Credit_CardModel creditCard = creditCardRepository.findById(cardId)
+                .orElseThrow(() -> new RuntimeException("Tarjeta de crédito no encontrada con el ID: " + cardId));
+
+        creditCard.setCreditLimit(newCreditLimit);
+        creditCard.setAvailableBalance(newCreditLimit); // Ajusta el saldo disponible al nuevo límite
+        return creditCardRepository.save(creditCard);
+    }
+
+    public List<Credit_CardModel> getCreditCardsByCustomerId(int customerId) {
+        if (!customerRepository.existsById(customerId)) {
+            throw new RuntimeException("Cliente con ID " + customerId + " no existe.");
+        }
+
+        // Lista de nombres válidos de productos
+        List<String> validProductNames = Arrays.asList(
+                "Tarjeta de Crédito con Recompensas en Efectivo",
+                "Tarjeta de Crédito para Compras en Línea",
+                "Tarjeta de Crédito de Bajos Intereses"
+        );
+
+        // Obtener las tarjetas de crédito y filtrar por nombres válidos
+        return creditCardRepository.findByCustomerId(customerId).stream()
+                .filter(card -> validProductNames.contains(card.getProductName()))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void deleteCreditCard(int cardId) {
+        if (!creditCardRepository.existsById(cardId)) {
+            throw new RuntimeException("Tarjeta de crédito no encontrada con el ID: " + cardId);
+        }
+        creditCardRepository.deleteById(cardId);
+    }
+
 }

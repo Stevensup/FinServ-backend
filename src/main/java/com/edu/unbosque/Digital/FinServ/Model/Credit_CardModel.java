@@ -40,6 +40,11 @@ public class Credit_CardModel {
 
     @ManyToOne
     @JoinColumn(name = "product_id", insertable = false, updatable = false)
-    @JsonIgnore
     private Financial_ProductsModel financialProduct;
+
+    // Campo transitorio para devolver el nombre del producto
+    @Transient
+    public String getProductName() {
+        return financialProduct != null ? financialProduct.getProductName() : null;
+    }
 }

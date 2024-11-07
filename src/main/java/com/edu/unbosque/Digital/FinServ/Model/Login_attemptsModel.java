@@ -28,7 +28,7 @@ public class Login_AttemptsModel {
     @Temporal(TemporalType.DATE)
     private Date attemptDate;
 
-    @Column(name = "success", nullable = false, updatable = false)
+    @Column(name = "success", nullable = false)
     private int success;
 
 //    @ManyToOne

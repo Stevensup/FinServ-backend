@@ -69,7 +69,7 @@ public class Customer_ProductsController {
     )
 
     public List<Customer_ProductsModel> getAllCustomerProducts() {
-        return customer_productsService.getAllCustomeProducts();
+        return customer_productsService.getAllCustomerProducts();
     }
 
     @PostMapping({"/update/{id}"})

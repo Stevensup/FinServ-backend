@@ -29,9 +29,15 @@ public class InvestmentController {
         try {
             InvestmentModel investment = new InvestmentModel();
             investment.setCustomerId((Integer) payload.get("customerId"));
-            investment.setInvestmentAmount((Double) payload.get("investmentAmount"));
-            String productTypeName = (String) payload.get("productTypeName");
 
+            // Convertir el investmentAmount a Double explícitamente
+            Object investmentAmountObj = payload.get("investmentAmount");
+            Double investmentAmount = investmentAmountObj instanceof Integer ?
+                    ((Integer) investmentAmountObj).doubleValue() :
+                    (Double) investmentAmountObj;
+            investment.setInvestmentAmount(investmentAmount);
+
+            String productTypeName = (String) payload.get("productTypeName");
             InvestmentModel createdInvestment = investmentService.createInvestment(investment, productTypeName);
             return ResponseEntity.ok(createdInvestment);
         } catch (Exception e) {

@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Transactional
 @CrossOrigin(
-    origins = {"http://localhost:8090", "http://localhost:8080", "*"}
+    origins = {"http://localhost:8090", "http://localhost:8082", "*"}
 )
 
 @RestController

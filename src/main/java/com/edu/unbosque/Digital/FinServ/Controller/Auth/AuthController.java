@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 @RestController
 @CrossOrigin(
-        origins = {"http://localhost:8093","http://localhost:8080","*"}
+        origins = {"http://localhost:8093","http://localhost:8082","*"}
 )
 @RequestMapping("/auth")
 public class AuthController {

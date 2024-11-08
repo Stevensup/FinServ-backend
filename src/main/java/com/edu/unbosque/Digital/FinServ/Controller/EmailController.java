@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @Transactional
-@CrossOrigin(origins = { "http://localhost:8090", "http://localhost:8080", "*" })
+@CrossOrigin(origins = { "http://localhost:8090", "http://localhost:8082", "*" })
 @RestController
 @RequestMapping("/correo")
 public class EmailController {

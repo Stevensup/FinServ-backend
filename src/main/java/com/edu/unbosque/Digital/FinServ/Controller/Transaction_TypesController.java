@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Transactional
-@CrossOrigin(origins = { "http://localhost:8090", "http://localhost:8080", "*" })
+@CrossOrigin(origins = { "http://localhost:8090", "http://localhost:8082", "*" })
 @RestController
 @RequestMapping("/transaction-types")
 public class Transaction_TypesController {

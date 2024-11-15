@@ -5,8 +5,9 @@ import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
-import org.junit.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -23,13 +24,12 @@ public class CustomerControllerTest {
     private CustomerController customerController;
 
     @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this); // Initialize mocks before each test
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void testGetCustomerById() {
-        // Test data for a client
+    public void testGetCustomerById() {
         int customerID = 1;
         CustomerModel mockCustomer = new CustomerModel();
         mockCustomer.setCustomerId(customerID);
@@ -39,18 +39,15 @@ public class CustomerControllerTest {
         mockCustomer.setPhone("3108904521");
         mockCustomer.setAddress("Cra 40 Sur #20 -2");
 
-        // Configuring simulated service behavior
         when(customerService.getCustomerById(customerID)).thenReturn(Optional.of(mockCustomer));
 
-        // Call to the controller method we want to test
         Optional<CustomerModel> response = customerController.getCustomerById(customerID);
 
-        // Verification of the expected response
-        assertEquals(true, response.isPresent(), "The client should be present");
-        assertEquals("Juan", response.get().getFirstName(), "The client's first name must be 'Juan'");
-        assertEquals("Andres", response.get().getLastName(), "The client's middle name must be 'Andres'");
-        assertEquals("Juan@gmail.com", response.get().getEmail(), "The customer's email must be 'Juan@gmail.com'");
-        assertEquals("3108904521", response.get().getPhone(), "The contact number should be '3108904521'");
-        assertEquals("Cra 40 Sur #20 -2", response.get().getAddress(), "The client's address must be 'Cra 40 Sur #20 -2'");
+        assertEquals(true, response.isPresent(), "El cliente debería estar presente");
+        assertEquals("Juan", response.get().getFirstName(), "El primer nombre del cliente debe ser 'Juan'");
+        assertEquals("Andres", response.get().getLastName(), "El segundo nombre del cliente debe ser 'Andres'");
+        assertEquals("Juan@gmail.com", response.get().getEmail(), "El correo electrónico debe ser 'Juan@gmail.com'");
+        assertEquals("3108904521", response.get().getPhone(), "El número de contacto debe ser '3108904521'");
+        assertEquals("Cra 40 Sur #20 -2", response.get().getAddress(), "La dirección debe ser 'Cra 40 Sur #20 -2'");
     }
 }

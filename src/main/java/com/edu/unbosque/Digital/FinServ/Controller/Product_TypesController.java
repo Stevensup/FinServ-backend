@@ -23,65 +23,50 @@ public class Product_TypesController {
     private Product_TypesService product_typesService;
 
     @PostMapping("/create")
-    @Operation(
-            summary = "Create a new Product_Types",
-            description = "Create a new Product_Types"
-    )
+    @Operation(summary = "Create a new Product_Types", description = "Create a new Product_Types")
     @ApiResponse(
-            responseCode = "200",
-            description = "Product_Types created successfully"
+            responseCode = "200", description = "Product_Types created successfully"
+            responseCode = "400", description = "Invalid input"
     )
     public Product_TypesModel createProduct_Types(@RequestBody Product_TypesModel product_types) {
         return product_typesService.createProduct_Types(product_types);
     }
 
     @GetMapping("/{id}")
-    @Operation(
-            summary = "Get a Product_Types by id",
-            description = "Get a Product_Types by id"
-    )
+    @Operation(summary = "Get a Product_Types by id", description = "Get a Product_Types by id")
     @ApiResponse(
-            responseCode = "200",
-            description = "Product_Types found"
+            responseCode = "200", description = "Product_Types found"
+            responseCode = "400", description = "Invalid input"
     )
     public Optional<Product_TypesModel> getProductTypesById(@PathVariable int id) {
         return product_typesService.getProductTypesById(id);
     }
 
     @GetMapping("/all")
-    @Operation(
-            summary = "Get all Product_Types",
-            description = "Get all Product_Types"
-    )
+    @Operation(summary = "Get all Product_Types", description = "Get all Product_Types")
     @ApiResponse(
-            responseCode = "200",
-            description = "Product_Types retrieved"
+            responseCode = "200", description = "Product_Types retrieved"
+            responseCode = "400", description = "Invalid input"
     )
     public List<Product_TypesModel> getAllProductTypes() {
         return product_typesService.getAllProductTypes();
     }
 
     @PutMapping("/update/{id}")
-    @Operation(
-            summary = "Update a Product_Types ",
-            description = "Update a Product_Types"
-    )
+    @Operation(summary = "Update a Product_Types ", description = "Update a Product_Types")
     @ApiResponse(
-            responseCode = "200",
-            description = "Product_Types updated"
+            responseCode = "200", description = "Product_Types updated"
+            responseCode = "400", description = "Invalid input"
     )
     public Product_TypesModel updateProduct_Types(@PathVariable int id, @RequestBody Product_TypesModel product_types) {
         return product_typesService.updateProduct_Types(id, product_types);
     }
 
     @DeleteMapping("/delete/{id}")
-    @Operation(
-            summary = "Delete a Product_Types",
-            description = "Delete a Product_Types"
-    )
+    @Operation(summary = "Delete a Product_Types", description = "Delete a Product_Types")
     @ApiResponse(
-            responseCode = "200",
-            description = "Product_Types deleted"
+            responseCode = "200", description = "Product_Types deleted"
+            responseCode = "400", description = "Invalid input"
     )
     public void deleteProduct_Types(@PathVariable int id) {
         product_typesService.deleteProduct_Types(id);

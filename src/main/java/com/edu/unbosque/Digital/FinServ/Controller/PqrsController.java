@@ -24,7 +24,10 @@ public class PqrsController {
 
     @PostMapping("/create")
     @Operation(summary = "Create a new PQRS", description = "Create a new PQRS")
-    @ApiResponse(responseCode = "200", description = "PQRS created")
+    @ApiResponse(
+            responseCode = "200", description = "PQRS created"
+            responseCode = "400", description = "Invalid input"
+    )
     public ResponseEntity<?> createPqrs(@RequestBody PqrsModel pqrs) {
         try {
             PqrsModel createdPqrs = pqrsService.createPqrs(pqrs);
@@ -37,7 +40,10 @@ public class PqrsController {
 
     @GetMapping("/findByCustomer/{customerId}")
     @Operation(summary = "Get all PQRS by Customer ID", description = "Get all PQRS entries associated with a customer")
-    @ApiResponse(responseCode = "200", description = "PQRS entries found")
+    @ApiResponse(
+            responseCode = "200", description = "PQRS entries found"
+            responseCode = "404", description = "No PQRS entries found"
+    )
     public ResponseEntity<?> getPqrsByCustomerId(@PathVariable int customerId) {
         List<PqrsModel> pqrsList = pqrsService.getPqrsByCustomerId(customerId);
         if (!pqrsList.isEmpty()) {
@@ -50,7 +56,10 @@ public class PqrsController {
 
     @PutMapping("/update/{id}")
     @Operation(summary = "Update a PQRS", description = "Update a PQRS")
-    @ApiResponse(responseCode = "200", description = "PQRS updated")
+    @ApiResponse(
+            responseCode = "200", description = "PQRS updated"
+            responseCode = "404", description = "PQRS not found"
+    )
     public ResponseEntity<?> updatePqrs(@PathVariable int id, @RequestBody PqrsModel pqrs) {
         try {
             PqrsModel updatedPqrs = pqrsService.updatePqrs(id, pqrs);
@@ -63,7 +72,10 @@ public class PqrsController {
 
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete a PQRS", description = "Delete a PQRS")
-    @ApiResponse(responseCode = "200", description = "PQRS deleted")
+    @ApiResponse(
+                responseCode = "200", description = "PQRS deleted"
+                responseCode = "404", description = "PQRS not found"
+    )
     public ResponseEntity<?> deletePqrs(@PathVariable int id) {
         try {
             pqrsService.deletePqrs(id);

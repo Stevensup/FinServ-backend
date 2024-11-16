@@ -33,6 +33,13 @@ public class AuthController {
     );
 
     @PostMapping("/login")
+    @Operation(summary = "Login to the application", description = "Authenticate a user and return their customer ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully authenticated user and returned customer ID"),
+            @ApiResponse(responseCode = "400", description = "Invalid email address"),
+            @ApiResponse(responseCode = "401", description = "Invalid credentials"),
+            @ApiResponse(responseCode = "500", description = "Failed to send email")
+    })
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         String username = loginRequest.getUsername();
         String passwordHash = loginRequest.getPasswordHash();

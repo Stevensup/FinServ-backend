@@ -41,6 +41,8 @@ public class InsurancePoliciesController {
 
 
     @PutMapping("/updateStatus/{policyId}")
+    @Operation(summary = "Update Policy Status", description = "Update the status of an existing insurance policy")
+    @ApiResponse(responseCode = "200", description = "Policy status updated")
     public ResponseEntity<?> updatePolicyStatus(@PathVariable int policyId, @RequestBody Map<String, Object> policyDetails) {
         try {
             String policyStatus = (String) policyDetails.get("policyStatus");

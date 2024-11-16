@@ -25,6 +25,8 @@ public class InvestmentController {
      * @return La inversión creada o un mensaje de error
      */
     @PostMapping("/create")
+    @Operation(summary = "Create a new investment", description = "Create a new investment")
+    @ApiResponse(responseCode = "200", description = "Investment created")
     public ResponseEntity<?> createInvestment(@RequestBody Map<String, Object> payload) {
         try {
             InvestmentModel investment = new InvestmentModel();
@@ -54,6 +56,8 @@ public class InvestmentController {
      * @return Mensaje de éxito o error
      */
     @DeleteMapping("/delete/{investmentId}")
+    @Operation(summary = "Delete an investment", description = "Delete an existing investment")
+    @ApiResponse(responseCode = "200", description = "Investment deleted")
     public ResponseEntity<?> deleteInvestment(@PathVariable int investmentId) {
         try {
             investmentService.deleteInvestment(investmentId);
@@ -71,6 +75,8 @@ public class InvestmentController {
      * @return Lista de inversiones del cliente o un mensaje de error
      */
     @GetMapping("/byCustomer/{customerId}")
+    @Operation(summary = "Get investments by customer ID", description = "Get investments by customer ID")
+    @ApiResponse(responseCode = "200", description = "Investments retrieved")
     public ResponseEntity<?> getInvestmentsByCustomerId(@PathVariable int customerId) {
         try {
             List<InvestmentModel> investments = investmentService.getInvestmentsByCustomerId(customerId);
@@ -91,6 +97,8 @@ public class InvestmentController {
      * @return La inversión actualizada o un mensaje de error
      */
     @PutMapping("/update/{investmentId}")
+    @Operation(summary = "Update an investment", description = "Update an existing investment")
+    @ApiResponse(responseCode = "200", description = "Investment updated")
     public ResponseEntity<?> updateInvestment(@PathVariable int investmentId, @RequestBody Map<String, Object> payload) {
         try {
             InvestmentModel updatedInvestment = investmentService.updateInvestment(investmentId, payload);

@@ -22,22 +22,30 @@ public class User_LoginsController {
 
     @PostMapping("/create")
     @Operation(summary = "Create a new user logins", description = "Create a new user logins")
-    @ApiResponse(responseCode = "200", description = "User logins created")
-
+    @ApiResponse(
+            responseCode = "200", description = "User logins created"
+            responseCode = "400", description = "Invalid input"
+    )
     public User_LoginsModel createUser_logins(@RequestBody User_LoginsModel user_logins) {
         return user_loginsService.createUser_logins(user_logins);
     }
 
     @PostMapping("/{id}")
     @Operation(summary = "Get a user logins by ID", description = "Get a user logins by ID")
-    @ApiResponse(responseCode = "200", description = "User logins found")
+    @ApiResponse(
+            responseCode = "200", description = "User logins found"
+            responseCode = "400", description = "Invalid input"
+    )
     public Optional<User_LoginsModel> getUser_loginsById(@PathVariable int id) {
         return user_loginsService.getUser_loginsById(id);
     }
 
     @GetMapping("/all")
     @Operation(summary = "Get all logins", description = "Get all logins")
-    @ApiResponse(responseCode = "200", description = "User logins retrieved")
+    @ApiResponse(
+            responseCode = "200", description = "User logins retrieved"
+            responseCode = "400", description = "Invalid input"
+    )
 
     public List<User_LoginsModel> getAllUser_logins() {
         return user_loginsService.getAllUser_logins();
@@ -45,7 +53,10 @@ public class User_LoginsController {
 
     @PutMapping("/update/{id}")
     @Operation(summary = "Update a logins", description = "Update a logins")
-    @ApiResponse(responseCode = "200", description = "User updated")
+    @ApiResponse(
+            responseCode = "200", description = "User updated"
+            responseCode = "400", description = "Invalid input"
+    )
 
     public User_LoginsModel updateUser_logins(@PathVariable int id, @RequestBody User_LoginsModel user_logins) {
         return user_loginsService.updateUser_logins(id, user_logins);
@@ -53,7 +64,10 @@ public class User_LoginsController {
 
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete a logins", description = "Delete a logins")
-    @ApiResponse(responseCode = "200", description = "User deleted")
+    @ApiResponse
+        responseCode = "200", description = "User deleted"
+        responseCode = "400", description = "Invalid input"
+            )
     public void deleteUser_logins(@PathVariable int id) {
         user_loginsService.deleteUser_logins(id);
     }

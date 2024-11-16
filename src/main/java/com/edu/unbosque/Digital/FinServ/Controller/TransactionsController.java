@@ -21,13 +21,10 @@ public class TransactionsController {
     private TransactionsService transactionsService;
 
     @PostMapping("/create")
-    @Operation(
-            summary = "Create a new transaction",
-            description = "Create a new transaction"
-    )
+    @Operation(summary = "Create a new transaction", description = "Create a new transaction")
     @ApiResponse(
-            responseCode = "200",
-            description = "Transaction created"
+            responseCode = "200", description = "Transaction created"
+            responseCode = "400", description = "Invalid input"
     )
     public TransactionsModel createTransaction(@RequestBody TransactionsModel transaction) {
         return transactionsService.createTransaction(transaction);
@@ -35,28 +32,40 @@ public class TransactionsController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Get a transaction by ID", description = "Get a transaction by ID")
-    @ApiResponse(responseCode = "200", description = "Transaction found")
+    @ApiResponse(
+            responseCode = "200", description = "Transaction found"
+            responseCode = "400", description = "Invalid input"
+    )
     public Optional<TransactionsModel> getTransactionById(@PathVariable int id) {
         return transactionsService.getTransactionById(id);
     }
 
     @GetMapping("/all")
     @Operation(summary = "Get all transactions", description = "Get all transactions")
-    @ApiResponse(responseCode = "200", description = "Transactions retrieved")
+    @ApiResponse(
+            responseCode = "200", description = "Transactions retrieved"
+            responseCode = "400", description = "Invalid input"
+    )
     public List<TransactionsModel> getAllTransactions() {
         return transactionsService.getAllTransactions();
     }
 
     @PutMapping("/update/{id}")
     @Operation(summary = "Update a transaction", description = "Update a transaction")
-    @ApiResponse(responseCode = "200", description = "Transaction updated")
+    @ApiResponse(
+            responseCode = "200", description = "Transaction updated"
+            responseCode = "400", description = "Invalid input"
+    )
     public TransactionsModel updateTransaction(@PathVariable int id, @RequestBody TransactionsModel transaction) {
         return transactionsService.updateTransaction(id, transaction);
     }
 
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete a transaction", description = "Delete a transaction")
-    @ApiResponse(responseCode = "200", description = "Transaction deleted")
+    @ApiResponse(
+            responseCode = "200", description = "Transaction deleted"
+            responseCode = "400", description = "Invalid input"
+    )
     public void deleteTransaction(@PathVariable int id) {
         transactionsService.deleteTransaction(id);
     }

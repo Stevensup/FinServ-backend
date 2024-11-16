@@ -24,38 +24,27 @@ public class Login_AttemptsController {
     private Login_AttemptsService login_attemptsService;
 
     @PostMapping("/create")
-    @Operation(
-        summary = "Create a new Login_attempts", 
-        description = "Create a new Login_attempts"
-    )
+    @Operation(summary = "Create a new Login_attempts", description = "Create a new Login_attempts")
     @ApiResponse(
         responseCode = "200", 
         description = "Login_Attempts created"
     )
-
     public Login_AttemptsModel createLoginAttempts(@RequestBody Login_AttemptsModel login_attempts){
         return login_attemptsService.createLogin_attempts(login_attempts);
     }
 
     @GetMapping("/{id}")
-    @Operation(
-        summary = "Get a Login_attempts by ID", 
-        description = "Get a Login_attempts by ID"
-    )
+    @Operation(summary = "Get a Login_attempts by ID", description = "Get a Login_attempts by ID")
     @ApiResponse(
         responseCode = "200", 
         description = "Login_Attempts found"
     )
-    
     public Optional<Login_AttemptsModel> getLoginAttemptsById(@PathVariable int id){
         return login_attemptsService.getLoginAttemptsById(id);
     }
 
     @GetMapping("/all")
-    @Operation(
-        summary = "Get all Login_attempts", 
-        description = "Get all Login_attempts"
-    )
+    @Operation(summary = "Get all Login_attempts", description = "Get all Login_attempts")
     @ApiResponse(
         responseCode = "200", 
         description = "Login_Attempts retrieved"
@@ -66,10 +55,7 @@ public class Login_AttemptsController {
     }
 
     @PutMapping("/update/{id}")
-    @Operation(
-        summary = "Update a Login_attempts", 
-        description = "Update a Login_attempts"
-    )
+    @Operation(summary = "Update a Login_attempts", description = "Update a Login_attempts")
     @ApiResponse(
         responseCode = "200", 
         description = "Login_Attempts updated"
@@ -80,10 +66,7 @@ public class Login_AttemptsController {
     }
 
     @DeleteMapping("/delete/{id}")
-    @Operation(
-        summary = "Delete a Login_attempts", 
-        description = "Delete a Login_attempts"
-    )
+    @Operation(summary = "Delete a Login_attempts", description = "Delete a Login_attempts")
     @ApiResponse(
         responseCode = "200", 
         description = "Login_Attempts deleted"

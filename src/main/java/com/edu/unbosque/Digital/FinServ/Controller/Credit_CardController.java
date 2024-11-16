@@ -26,6 +26,11 @@ public class Credit_CardController {
      * @return la tarjeta de crédito creada
      */
     @PostMapping("/create")
+    @Operation(summary = "Crear una tarjeta de crédito", description = "Crea una nueva tarjeta de crédito.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Tarjeta de crédito creada con éxito."),
+            @ApiResponse(responseCode = "500", description = "Error creando la tarjeta de crédito.")
+    })
     public ResponseEntity<?> createCreditCard(@RequestBody Map<String, Object> payload) {
         try {
             // Convertir los datos para evitar problemas de tipo
@@ -54,6 +59,11 @@ public class Credit_CardController {
     }
 
     @PutMapping("/updateLimit/{id}")
+    @Operation(summary = "Actualizar el límite de crédito", description = "Actualiza el límite de crédito de una tarjeta de crédito.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Límite de crédito actualizado con éxito."),
+            @ApiResponse(responseCode = "500", description = "Error actualizando el límite de crédito.")
+    })
     public ResponseEntity<?> updateCreditLimit(@PathVariable int id, @RequestBody Map<String, Object> payload) {
         try {
             double newCreditLimit = Double.parseDouble(payload.get("creditLimit").toString());
@@ -67,6 +77,11 @@ public class Credit_CardController {
     }
 
     @GetMapping("/detailsByCustomer/{customerId}")
+    @Operation(summary = "Obtener tarjetas de crédito por cliente", description = "Obtiene las tarjetas de crédito de un cliente.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Tarjetas de crédito obtenidas con éxito."),
+            @ApiResponse(responseCode = "500", description = "Error obteniendo tarjetas de crédito.")
+    })
     public ResponseEntity<?> getCreditCardsByCustomerId(@PathVariable int customerId) {
         try {
             List<Credit_CardModel> creditCards = creditCardService.getCreditCardsByCustomerId(customerId);
@@ -79,6 +94,11 @@ public class Credit_CardController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @Operation(summary = "Eliminar tarjeta de crédito", description = "Elimina una tarjeta de crédito.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Tarjeta de crédito eliminada con éxito."),
+            @ApiResponse(responseCode = "500", description = "Error eliminando la tarjeta de crédito.")
+    })
     public ResponseEntity<?> deleteCreditCard(@PathVariable int id) {
         try {
             creditCardService.deleteCreditCard(id);

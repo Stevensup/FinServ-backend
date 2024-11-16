@@ -30,7 +30,7 @@ public class EmailController {
      * @return un mensaje indicando si el correo se envió exitosamente
      */
     @PostMapping("/enviar")
-    @Operation(summary = "Enviar correo", description = "Envía un correo electrónico.")
+    @Operation(summary = "Enviar correo electrónico", description = "Envía un correo electrónico.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Correo enviado exitosamente"),
             @ApiResponse(responseCode = "412", description = "Precondición fallida"),

@@ -30,7 +30,6 @@ public class TransactionsController {
     @Operation(summary = "Create a new transaction", description = "Create a new transaction")
     @ApiResponse(
             responseCode = "200", description = "Transaction created"
-            responseCode = "400", description = "Invalid input"
     )
     public TransactionsModel createTransaction(@RequestBody TransactionsModel transaction) {
         return transactionsService.createTransaction(transaction);
@@ -46,7 +45,6 @@ public class TransactionsController {
     @Operation(summary = "Get a transaction by ID", description = "Get a transaction by ID")
     @ApiResponse(
             responseCode = "200", description = "Transaction found"
-            responseCode = "400", description = "Invalid input"
     )
     public Optional<TransactionsModel> getTransactionById(@PathVariable int id) {
         return transactionsService.getTransactionById(id);
@@ -61,7 +59,6 @@ public class TransactionsController {
     @Operation(summary = "Get all transactions", description = "Get all transactions")
     @ApiResponse(
             responseCode = "200", description = "Transactions retrieved"
-            responseCode = "400", description = "Invalid input"
     )
     public List<TransactionsModel> getAllTransactions() {
         return transactionsService.getAllTransactions();
@@ -78,7 +75,6 @@ public class TransactionsController {
     @Operation(summary = "Update a transaction", description = "Update a transaction")
     @ApiResponse(
             responseCode = "200", description = "Transaction updated"
-            responseCode = "400", description = "Invalid input"
     )
     public TransactionsModel updateTransaction(@PathVariable int id, @RequestBody TransactionsModel transaction) {
         return transactionsService.updateTransaction(id, transaction);
@@ -93,7 +89,6 @@ public class TransactionsController {
     @Operation(summary = "Delete a transaction", description = "Delete a transaction")
     @ApiResponse(
             responseCode = "200", description = "Transaction deleted"
-            responseCode = "400", description = "Invalid input"
     )
     public void deleteTransaction(@PathVariable int id) {
         transactionsService.deleteTransaction(id);

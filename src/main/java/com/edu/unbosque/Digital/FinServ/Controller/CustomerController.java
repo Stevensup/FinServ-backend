@@ -32,7 +32,6 @@ public class CustomerController {
     @Operation(summary = "Create a new customer", description = "Create a new customer")
     @ApiResponse(
             responseCode = "200", description = "Customer created"
-            responseCode = "500", description = "Error creating customer"
     )
     public CustomerModel createCustomer(@RequestBody CustomerModel customer) {
         return customerService.createCustomer(customer);
@@ -48,7 +47,6 @@ public class CustomerController {
     @Operation(summary = "Get a customer by ID", description = "Get a customer by ID")
     @ApiResponse(
             responseCode = "200", description = "Customer found"
-            responseCode = "404", description = "Customer not found"
     )
     public Optional<CustomerModel> getCustomerById(@PathVariable int id) {
         return customerService.getCustomerById(id);
@@ -63,7 +61,6 @@ public class CustomerController {
     @Operation(summary = "Get all customers", description = "Get all customers")
     @ApiResponse(
             responseCode = "200", description = "Customers retrieved"
-            responseCode = "404", description = "Customers not found"
     )
     public List<CustomerModel> getAllCustomers() {
         return customerService.getAllCustomers();
@@ -80,7 +77,6 @@ public class CustomerController {
     @Operation(summary = "Update a customer", description = "Update a customer")
     @ApiResponse(
             responseCode = "200", description = "Customer updated"
-            responseCode = "500", description = "Error updating customer"
     )
     public CustomerModel updateCustomer(@PathVariable int id, @RequestBody CustomerModel customer) {
         return customerService.updateCustomer(id, customer);
@@ -94,7 +90,6 @@ public class CustomerController {
     @Operation(summary = "Delete a customer", description = "Delete a customer")
     @ApiResponse(
             responseCode = "200", description = "Customer deleted"
-            responseCode = "500", description = "Error deleting customer"
     )
     public void deleteCustomer(@PathVariable int id) {
         customerService.deleteCustomer(id);

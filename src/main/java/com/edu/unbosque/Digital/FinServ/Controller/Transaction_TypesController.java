@@ -30,7 +30,6 @@ public class Transaction_TypesController {
     @Operation(summary = "Create a new transaction type", description = "Create a new transaction type")
     @ApiResponse(
             responseCode = "200", description = "Transaction type created"
-            responseCode = "400", description = "Invalid input"
     )
     public Transaction_TypesModel createTransactionType(@RequestBody Transaction_TypesModel transactionType) {
         return transactionTypesService.createTransactionType(transactionType);
@@ -46,7 +45,6 @@ public class Transaction_TypesController {
     @Operation(summary = "Get a transaction type by ID", description = "Get a transaction type by ID")
     @ApiResponse(
             responseCode = "200", description = "Transaction type found"
-            responseCode = "400", description = "Invalid input"
     )
     public Optional<Transaction_TypesModel> getTransactionTypeById(@PathVariable int id) {
         return transactionTypesService.getTransactionTypeById(id);
@@ -61,7 +59,6 @@ public class Transaction_TypesController {
     @Operation(summary = "Get all transaction types", description = "Get all transaction types")
     @ApiResponse(
             responseCode = "200", description = "Transaction types retrieved"
-            responseCode = "400", description = "Invalid input"
     )
     public List<Transaction_TypesModel> getAllTransactionTypes() {
         return transactionTypesService.getAllTransactionTypes();
@@ -78,7 +75,6 @@ public class Transaction_TypesController {
     @Operation(summary = "Update a transaction type", description = "Update a transaction type")
     @ApiResponse(
             responseCode = "200", description = "Transaction type updated"
-            responseCode = "400", description = "Invalid input"
     )
     public Transaction_TypesModel updateTransactionType(@PathVariable int id, @RequestBody Transaction_TypesModel transactionType) {
         return transactionTypesService.updateTransactionType(id, transactionType);
@@ -93,7 +89,6 @@ public class Transaction_TypesController {
     @Operation(summary = "Delete a transaction type", description = "Delete a transaction type")
     @ApiResponse(
             responseCode = "200", description = "Transaction type deleted"
-            responseCode = "400", description = "Invalid input"
     )
     public void deleteTransactionType(@PathVariable int id) {
         transactionTypesService.deleteTransactionType(id);

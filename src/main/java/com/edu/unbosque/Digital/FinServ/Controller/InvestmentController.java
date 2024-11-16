@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.Map;
 import java.util.List;
 
@@ -28,7 +29,6 @@ public class InvestmentController {
     @Operation(summary = "Create a new investment", description = "Create a new investment")
     @ApiResponse(
             responseCode = "200", description = "Investment created"
-            responseCode = "500", description = "Error creating investment"
     )
     public ResponseEntity<?> createInvestment(@RequestBody Map<String, Object> payload) {
         try {
@@ -62,7 +62,6 @@ public class InvestmentController {
     @Operation(summary = "Delete an investment", description = "Delete an existing investment")
     @ApiResponse(
             responseCode = "200", description = "Investment deleted"
-            responseCode = "404", description = "Error deleting investment"
     )
     public ResponseEntity<?> deleteInvestment(@PathVariable int investmentId) {
         try {
@@ -84,7 +83,6 @@ public class InvestmentController {
     @Operation(summary = "Get investments by customer ID", description = "Get investments by customer ID")
     @ApiResponse(
             responseCode = "200", description = "Investments retrieved"
-            responseCode = "404", description = "No investments found"
     )
     public ResponseEntity<?> getInvestmentsByCustomerId(@PathVariable int customerId) {
         try {
@@ -109,7 +107,6 @@ public class InvestmentController {
     @Operation(summary = "Update an investment", description = "Update an existing investment")
     @ApiResponse(
             responseCode = "200", description = "Investment updated"
-            responseCode = "400", description = "Error updating investment"
     )
     public ResponseEntity<?> updateInvestment(@PathVariable int investmentId, @RequestBody Map<String, Object> payload) {
         try {

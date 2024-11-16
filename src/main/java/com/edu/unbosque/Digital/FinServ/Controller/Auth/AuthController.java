@@ -8,6 +8,9 @@ import com.edu.unbosque.Digital.FinServ.Service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import java.util.regex.Pattern;
 
@@ -41,8 +44,7 @@ public class AuthController {
     @PostMapping("/login")
     @Operation(summary = "Login to the application", description = "Authenticate a user and return their customer ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully authenticated user and returned customer ID"),
-            @ApiResponse(responseCode = "400", description = "Invalid email address"),
+            @ApiResponse(responseCode = "200", description = "Login successful"),
             @ApiResponse(responseCode = "401", description = "Invalid credentials"),
             @ApiResponse(responseCode = "500", description = "Failed to send email")
     })

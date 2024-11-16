@@ -32,7 +32,6 @@ public class PqrsController {
     @Operation(summary = "Create a new PQRS", description = "Create a new PQRS")
     @ApiResponse(
             responseCode = "200", description = "PQRS created"
-            responseCode = "400", description = "Invalid input"
     )
     public ResponseEntity<?> createPqrs(@RequestBody PqrsModel pqrs) {
         try {
@@ -54,7 +53,6 @@ public class PqrsController {
     @Operation(summary = "Get all PQRS by Customer ID", description = "Get all PQRS entries associated with a customer")
     @ApiResponse(
             responseCode = "200", description = "PQRS entries found"
-            responseCode = "404", description = "No PQRS entries found"
     )
     public ResponseEntity<?> getPqrsByCustomerId(@PathVariable int customerId) {
         List<PqrsModel> pqrsList = pqrsService.getPqrsByCustomerId(customerId);
@@ -76,7 +74,6 @@ public class PqrsController {
     @Operation(summary = "Update a PQRS", description = "Update a PQRS")
     @ApiResponse(
             responseCode = "200", description = "PQRS updated"
-            responseCode = "404", description = "PQRS not found"
     )
     public ResponseEntity<?> updatePqrs(@PathVariable int id, @RequestBody PqrsModel pqrs) {
         try {
@@ -98,7 +95,6 @@ public class PqrsController {
     @Operation(summary = "Delete a PQRS", description = "Delete a PQRS")
     @ApiResponse(
                 responseCode = "200", description = "PQRS deleted"
-                responseCode = "404", description = "PQRS not found"
     )
     public ResponseEntity<?> deletePqrs(@PathVariable int id) {
         try {

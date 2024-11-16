@@ -31,7 +31,6 @@ public class NotificationsController{
     @Operation(summary = "Create a new notifications", description = "Create a new notifications")
     @ApiResponse(
             responseCode = "200", description = "Notifications created"
-            responseCode = "400", description = "Invalid input"
     )
 
     public NotificationsModel createNotifications(@RequestBody NotificationsModel notifications){
@@ -48,7 +47,6 @@ public class NotificationsController{
     @Operation(summary = "Get a notifications by ID", description = "Get a notifications by ID")
     @ApiResponse(
         responseCode = "200", description = "Notifications found"
-        responseCode = "400", description = "Invalid input"
     )
 
     public Optional<NotificationsModel> getNotificationsById(@PathVariable int id){
@@ -64,7 +62,6 @@ public class NotificationsController{
     @Operation(summary = "Get all notifications", description = "Get all notifications")
     @ApiResponse(
         responseCode = "200", description = "Notifications retrieved"
-        responseCode = "400", description = "Invalid input"
     )
 
     public Iterable<NotificationsModel> getAllNotifications(){
@@ -82,7 +79,6 @@ public class NotificationsController{
     @Operation(summary = "Update a notifications", description = "Update a notifications")
     @ApiResponse(
         responseCode = "200", description = "Notifications updated"
-        responseCode = "400", description = "Invalid input"
     )
 
     public NotificationsModel updateNotifications(@PathVariable int id, @RequestBody NotificationsModel notifications){
@@ -98,7 +94,6 @@ public class NotificationsController{
     @Operation(summary = "Delete a notifications", description = "Delete a notifications")
     @ApiResponse(
         responseCode = "200", description = "Notifications deleted"
-        responseCode = "400", description = "Invalid input"
     )
     public void deleteNotifications(@PathVariable int id){
         notificationsService.deleteNotifications(id);

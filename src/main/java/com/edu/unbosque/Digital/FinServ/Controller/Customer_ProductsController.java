@@ -33,7 +33,6 @@ public class Customer_ProductsController {
     @Operation(summary = "Create a new Customer_Products", description = "Create a new Customer_Products.")
     @ApiResponse(
             responseCode = "200", description = "Customer_Products created successfully."
-            responseCode = "500", description = "Error creating Customer_Products."
     )
     public Customer_ProductsModel createCustomerProducts(@RequestBody Customer_ProductsModel customer_products) {
         return customer_productsService.createCustomer_Products(customer_products);
@@ -49,7 +48,6 @@ public class Customer_ProductsController {
     @Operation(summary = "Get a Customer_Products by ID", description = "Get a Customer_Products by ID.")
     @ApiResponse(
             responseCode = "200", description = "Customer_Products found."
-            responseCode = "404", description = "Customer_Products not found."
     )
     public Optional<Customer_ProductsModel> getCustomerProductsById(@PathVariable int id) {
         return customer_productsService.getCustomerProductsById(id);
@@ -63,7 +61,6 @@ public class Customer_ProductsController {
     @Operation(summary = "Get all Customer_Products", description = "Get all Customer_Products.")
     @ApiResponse(
             responseCode = "200", description = "Customer_Products found."
-            responseCode = "404", description = "Customer_Products not found."
     )
     public List<Customer_ProductsModel> getAllCustomerProducts() {
         return customer_productsService.getAllCustomerProducts();
@@ -80,7 +77,6 @@ public class Customer_ProductsController {
     @Operation(summary = "Update a Customer_Products", description = "Update a Customer_Products.")
     @ApiResponse(
             responseCode = "200", description = "Customer_Products updated successfully."
-            responseCode = "404", description = "Customer_Products not found."
     )
     public Customer_ProductsModel updateCustomerProducts(@PathVariable int id, @RequestBody Customer_ProductsModel customer_products) {
         return customer_productsService.updateCustomerProducts(id, customer_products);
@@ -95,7 +91,6 @@ public class Customer_ProductsController {
     @Operation(summary = "Delete a Customer_Products", description = "Delete a Customer_Products.")
     @ApiResponse(
             responseCode = "200", description = "Customer_Products deleted successfully."
-            responseCode = "404", description = "Customer_Products not found."
     )
     public void deleteCustomerProducts(@PathVariable int id) {
         customer_productsService.deleteCustomerProducts(id);

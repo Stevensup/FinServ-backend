@@ -33,7 +33,6 @@ public class Login_AttemptsController {
     @Operation(summary = "Create a new Login_attempts", description = "Create a new Login_attempts")
     @ApiResponse(
         responseCode = "200", description = "Login_Attempts created"
-        responseCode = "500", description = "Error creating Login_Attempts"
     )
     public Login_AttemptsModel createLoginAttempts(@RequestBody Login_AttemptsModel login_attempts){
         return login_attemptsService.createLogin_attempts(login_attempts);
@@ -49,7 +48,6 @@ public class Login_AttemptsController {
     @Operation(summary = "Get a Login_attempts by ID", description = "Get a Login_attempts by ID")
     @ApiResponse(
         responseCode = "200", description = "Login_Attempts found"
-        responseCode = "404", description = "Login_Attempts not found"
     )
     public Optional<Login_AttemptsModel> getLoginAttemptsById(@PathVariable int id){
         return login_attemptsService.getLoginAttemptsById(id);
@@ -64,7 +62,6 @@ public class Login_AttemptsController {
     @Operation(summary = "Get all Login_attempts", description = "Get all Login_attempts")
     @ApiResponse(
         responseCode = "200", description = "Login_Attempts retrieved"
-        responseCode = "404", description = "Login_Attempts not found"
     )
 
     public List<Login_AttemptsModel> getAllLoginAttempts(){
@@ -82,7 +79,6 @@ public class Login_AttemptsController {
     @Operation(summary = "Update a Login_attempts", description = "Update a Login_attempts")
     @ApiResponse(
         responseCode = "200", description = "Login_Attempts updated"
-        responseCode = "500", description = "Error updating Login_Attempts"
     )
 
     public Login_AttemptsModel updateLoginAttempts(@PathVariable int id, @RequestBody Login_AttemptsModel loginAttempts){
@@ -98,7 +94,6 @@ public class Login_AttemptsController {
     @Operation(summary = "Delete a Login_attempts", description = "Delete a Login_attempts")
     @ApiResponse(
         responseCode = "200", description = "Login_Attempts deleted"
-        responseCode = "500", description = "Error deleting Login_Attempts"
     )
 
     public void deleteLoginAttempts(@PathVariable int id){

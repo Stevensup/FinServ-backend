@@ -39,7 +39,6 @@ public class Financial_ProductsController {
     @Operation(summary = "Create a new Financial_Products", description = "Create a new Financial_Products")
     @ApiResponse(
             responseCode = "200", description = "Financial_Products created successfully"
-            responseCode = "500", description = "Error creating Financial_Products"
     )
     public Financial_ProductsModel createFinancialProducts(@RequestBody Financial_ProductsModel financial_products) {
         return financial_productsService.createFinancial_Products(financial_products);
@@ -54,7 +53,6 @@ public class Financial_ProductsController {
     @Operation(summary = "Get a Financial_Products by id", description = "Get a Financial_Products by id")
     @ApiResponse(
         responseCode = "200", description = "Financial_Products found"
-        responseCode = "404", description = "Financial_Products not found"
     )
 
     public Optional<Financial_ProductsModel> getFinancialProductsById(@PathVariable int id) {
@@ -70,7 +68,6 @@ public class Financial_ProductsController {
     @Operation(summary = "Get all Financial_Products", description = "Get all Financial_Products")
     @ApiResponse(
         responseCode = "200", description = "Financial_Products retrieved"
-        responseCode = "404", description = "Financial_Products not found"
     )
     public List<Financial_ProductsModel> getAllFinancialProducts() {
         return financial_productsService.getAllFinancialProducts();
@@ -86,7 +83,6 @@ public class Financial_ProductsController {
     @Operation(summary = "Update a Financial_Products", description = "Update a Financial_Products")
     @ApiResponse(
         responseCode = "200", description = "Financial_Products updated"
-        responseCode = "404", description = "Financial_Products not found"
     )
     public Financial_ProductsModel updateFinancialProducts(@PathVariable int id, @RequestBody Financial_ProductsModel financial_products) {
         return financial_productsService.updateFinancialProducts(id, financial_products);
@@ -101,7 +97,6 @@ public class Financial_ProductsController {
     @Operation(summary = "Delete a Financial_Products", description = "Delete a Financial_Products")
     @ApiResponse(
         responseCode = "200", description = "Financial_Products deleted"
-        responseCode = "404", description = "Financial_Products not found"
     )
     public void deleteFinancialProducts(@PathVariable int id) {
         financial_productsService.deleteFinancialProducts(id);

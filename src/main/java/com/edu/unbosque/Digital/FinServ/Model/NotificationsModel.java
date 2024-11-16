@@ -6,6 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
 
+
+/**
+ * An entity NotificationsModel that describes the Notifications Model
+ * @Model NotificationsModel
+ */
 @Data
 @Entity
 @Getter

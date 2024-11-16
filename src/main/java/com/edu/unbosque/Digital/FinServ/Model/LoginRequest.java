@@ -1,6 +1,11 @@
 package com.edu.unbosque.Digital.FinServ.Model;
 
 
+
+/**
+ * An entity LoginRequest that describes the Login Request Model
+ * @Model LoginRequest
+ */
 public class LoginRequest {
     private String username;
     private String passwordHash;

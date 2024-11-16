@@ -5,6 +5,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 import java.util.List;
 
+
+/**
+ * An entity Product_TypesModel that describes the Product Types Model
+ * @Model Product_TypesModel
+ */
 @Data
 @Entity
 @Table(name = "product_types")

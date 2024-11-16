@@ -20,6 +20,12 @@ public class User_LoginsController {
     @Autowired
     private User_LoginsService user_loginsService;
 
+    /**
+     * Create a new user logins.
+     *
+     * @param user_logins data needed to create a new user logins
+     * @return the created user logins
+     */
     @PostMapping("/create")
     @Operation(summary = "Create a new user logins", description = "Create a new user logins")
     @ApiResponse(
@@ -30,6 +36,12 @@ public class User_LoginsController {
         return user_loginsService.createUser_logins(user_logins);
     }
 
+    /**
+     * Get a user logins by ID.
+     *
+     * @param id the ID of the user logins
+     * @return the user logins found
+     */
     @PostMapping("/{id}")
     @Operation(summary = "Get a user logins by ID", description = "Get a user logins by ID")
     @ApiResponse(
@@ -40,6 +52,11 @@ public class User_LoginsController {
         return user_loginsService.getUser_loginsById(id);
     }
 
+    /**
+     * Get all user logins.
+     *
+     * @return all user logins
+     */
     @GetMapping("/all")
     @Operation(summary = "Get all logins", description = "Get all logins")
     @ApiResponse(
@@ -51,6 +68,13 @@ public class User_LoginsController {
         return user_loginsService.getAllUser_logins();
     }
 
+    /**
+     * Update a user logins.
+     *
+     * @param id the ID of the user logins
+     * @param user_logins data needed to update the user logins
+     * @return the updated user logins
+     */
     @PutMapping("/update/{id}")
     @Operation(summary = "Update a logins", description = "Update a logins")
     @ApiResponse(
@@ -62,6 +86,11 @@ public class User_LoginsController {
         return user_loginsService.updateUser_logins(id, user_logins);
     }
 
+    /**
+     * Delete a user logins.
+     *
+     * @param id the ID of the user logins
+     */
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete a logins", description = "Delete a logins")
     @ApiResponse

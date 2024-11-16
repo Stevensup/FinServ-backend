@@ -20,6 +20,12 @@ public class TransactionsController {
     @Autowired
     private TransactionsService transactionsService;
 
+    /**
+     * Create a new transaction.
+     *
+     * @param transaction data needed to create a new transaction
+     * @return the created transaction
+     */
     @PostMapping("/create")
     @Operation(summary = "Create a new transaction", description = "Create a new transaction")
     @ApiResponse(
@@ -30,6 +36,12 @@ public class TransactionsController {
         return transactionsService.createTransaction(transaction);
     }
 
+    /**
+     * Get a transaction by ID.
+     *
+     * @param id the ID of the transaction
+     * @return the transaction found
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Get a transaction by ID", description = "Get a transaction by ID")
     @ApiResponse(
@@ -40,6 +52,11 @@ public class TransactionsController {
         return transactionsService.getTransactionById(id);
     }
 
+    /**
+     * Get all transactions.
+     *
+     * @return all transactions
+     */
     @GetMapping("/all")
     @Operation(summary = "Get all transactions", description = "Get all transactions")
     @ApiResponse(
@@ -50,6 +67,13 @@ public class TransactionsController {
         return transactionsService.getAllTransactions();
     }
 
+    /**
+     * Update a transaction.
+     *
+     * @param id the ID of the transaction
+     * @param transaction data needed to update the transaction
+     * @return the updated transaction
+     */
     @PutMapping("/update/{id}")
     @Operation(summary = "Update a transaction", description = "Update a transaction")
     @ApiResponse(
@@ -60,6 +84,11 @@ public class TransactionsController {
         return transactionsService.updateTransaction(id, transaction);
     }
 
+    /**
+     * Delete a transaction.
+     *
+     * @param id the ID of the transaction
+     */
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete a transaction", description = "Delete a transaction")
     @ApiResponse(

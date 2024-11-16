@@ -3,6 +3,11 @@ package com.edu.unbosque.Digital.FinServ.Model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
+/**
+ * An entity Financial_ProductsModel that describes the Financial Products Model
+ * @Model Financial_ProductsModel
+ */
 @Data
 @Entity
 @Table(name = "financial_products")

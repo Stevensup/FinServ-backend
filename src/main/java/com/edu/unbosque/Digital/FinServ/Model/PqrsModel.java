@@ -6,6 +6,12 @@ import lombok.Data;
 
 import java.util.Date;
 
+
+
+/**
+ * An entity PqrsModel that describes the PQRS Model
+ * @Model PqrsModel
+ */
 @Data
 @Entity
 @Table(name = "pqrs")

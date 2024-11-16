@@ -26,7 +26,10 @@ public class InvestmentController {
      */
     @PostMapping("/create")
     @Operation(summary = "Create a new investment", description = "Create a new investment")
-    @ApiResponse(responseCode = "200", description = "Investment created")
+    @ApiResponse(
+            responseCode = "200", description = "Investment created"
+            responseCode = "500", description = "Error creating investment"
+    )
     public ResponseEntity<?> createInvestment(@RequestBody Map<String, Object> payload) {
         try {
             InvestmentModel investment = new InvestmentModel();
@@ -57,7 +60,10 @@ public class InvestmentController {
      */
     @DeleteMapping("/delete/{investmentId}")
     @Operation(summary = "Delete an investment", description = "Delete an existing investment")
-    @ApiResponse(responseCode = "200", description = "Investment deleted")
+    @ApiResponse(
+            responseCode = "200", description = "Investment deleted"
+            responseCode = "404", description = "Error deleting investment"
+    )
     public ResponseEntity<?> deleteInvestment(@PathVariable int investmentId) {
         try {
             investmentService.deleteInvestment(investmentId);
@@ -76,7 +82,10 @@ public class InvestmentController {
      */
     @GetMapping("/byCustomer/{customerId}")
     @Operation(summary = "Get investments by customer ID", description = "Get investments by customer ID")
-    @ApiResponse(responseCode = "200", description = "Investments retrieved")
+    @ApiResponse(
+            responseCode = "200", description = "Investments retrieved"
+            responseCode = "404", description = "No investments found"
+    )
     public ResponseEntity<?> getInvestmentsByCustomerId(@PathVariable int customerId) {
         try {
             List<InvestmentModel> investments = investmentService.getInvestmentsByCustomerId(customerId);
@@ -98,7 +107,10 @@ public class InvestmentController {
      */
     @PutMapping("/update/{investmentId}")
     @Operation(summary = "Update an investment", description = "Update an existing investment")
-    @ApiResponse(responseCode = "200", description = "Investment updated")
+    @ApiResponse(
+            responseCode = "200", description = "Investment updated"
+            responseCode = "400", description = "Error updating investment"
+    )
     public ResponseEntity<?> updateInvestment(@PathVariable int investmentId, @RequestBody Map<String, Object> payload) {
         try {
             InvestmentModel updatedInvestment = investmentService.updateInvestment(investmentId, payload);

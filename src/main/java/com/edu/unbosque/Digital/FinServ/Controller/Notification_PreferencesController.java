@@ -20,6 +20,12 @@ public class Notification_PreferencesController {
     @Autowired
     private NotificationPreferencesService notification_preferencesService;
 
+    /**
+     * Create a new notification_preferences.
+     *
+     * @param notification_preferences data needed to create a new notification_preferences
+     * @return the created notification_preferences
+     */
     @PostMapping("/create")
     @Operation(summary = "Create a new notification_preferences", description = "Create a new notification_preferences")
     @ApiResponse(
@@ -30,6 +36,12 @@ public class Notification_PreferencesController {
         return notification_preferencesService.createNotification_Preferences(notification_preferences);
     }
 
+    /**
+     * Get a notification_preferences by ID.
+     *
+     * @param id the ID of the notification_preferences
+     * @return the notification_preferences found
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Get a notification_preferences by ID", description = "Get a notification_preferences by ID")
     @ApiResponse(
@@ -39,7 +51,11 @@ public class Notification_PreferencesController {
     public Optional<NotificationPreferencesModel> getNotification_PreferencesById(@PathVariable int id) {
         return Optional.ofNullable(notification_preferencesService.getNotification_PreferencesById(id));
     }
-
+    /**
+     * Get all notification_preferences.
+     *
+     * @return all notification_preferences
+     */
     @GetMapping("/all")
     @Operation(summary = "Get all notification_preferences", description = "Get all notification_preferences")
     @ApiResponse(
@@ -50,6 +66,13 @@ public class Notification_PreferencesController {
         return notification_preferencesService.getAllNotification_Preferences();
     }
 
+    /**
+     * Update a notification_preferences.
+     *
+     * @param id the ID of the notification_preferences
+     * @param notification_preferences data needed to update a notification_preferences
+     * @return the updated notification_preferences
+     */
     @PutMapping("/update/{id}")
     @Operation(summary = "Update a notification_preferences", description = "Update a notification_preferences")
     @ApiResponse(
@@ -60,6 +83,11 @@ public class Notification_PreferencesController {
         return notification_preferencesService.updateNotification_Preferences(id, notification_preferences);
     }
 
+    /**
+     * Delete a notification_preferences.
+     *
+     * @param id the ID of the notification_preferences
+     */
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete a notification_preferences", description = "Delete a notification_preferences")
     @ApiResponse(

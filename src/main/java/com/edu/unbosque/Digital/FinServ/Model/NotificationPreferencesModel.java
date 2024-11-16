@@ -1,9 +1,13 @@
 package com.edu.unbosque.Digital.FinServ.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
+/**
+ * An entity NotificationPreferencesModel that describes the Notification Preferences Model
+ * @Model NotificationPreferencesModel
+ */
 @Data
 @Entity
 @Table(name = "notification_preferences")

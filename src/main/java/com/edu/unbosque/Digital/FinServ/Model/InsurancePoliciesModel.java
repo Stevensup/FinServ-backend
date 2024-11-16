@@ -6,6 +6,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
+
+/**
+ * An entity InsurancePoliciesModel that describes the Insurance Policies Model
+ * @Model InsurancePoliciesModel
+ */
 @Data
 @Entity
 @Table(name = "insurance_policies")

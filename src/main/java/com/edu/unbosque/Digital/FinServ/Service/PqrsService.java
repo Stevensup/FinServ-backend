@@ -8,13 +8,19 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
-
-
+/**
+ * Service class for managing PQRS.
+ */
 @Service
 public class PqrsService {
     @Autowired
     private PqrsRepository pqrsRepository;
 
+    /**
+     * Retrieves all PQRS.
+     *
+     * @return a list of all PQRS
+     */
     public PqrsModel createPqrs(PqrsModel pqrs) {
         try {
             pqrs.setCreationDate(new Date());

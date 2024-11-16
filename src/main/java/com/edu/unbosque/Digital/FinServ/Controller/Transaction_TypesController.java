@@ -20,6 +20,12 @@ public class Transaction_TypesController {
     @Autowired
     private Transaction_TypesService transactionTypesService;
 
+    /**
+     * Create a new transaction type.
+     *
+     * @param transactionType data needed to create a new transaction type
+     * @return the created transaction type
+     */
     @PostMapping("/create")
     @Operation(summary = "Create a new transaction type", description = "Create a new transaction type")
     @ApiResponse(
@@ -30,6 +36,12 @@ public class Transaction_TypesController {
         return transactionTypesService.createTransactionType(transactionType);
     }
 
+    /**
+     * Get a transaction type by ID.
+     *
+     * @param id the ID of the transaction type
+     * @return the transaction type found
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Get a transaction type by ID", description = "Get a transaction type by ID")
     @ApiResponse(
@@ -40,6 +52,11 @@ public class Transaction_TypesController {
         return transactionTypesService.getTransactionTypeById(id);
     }
 
+    /**
+     * Get all transaction types.
+     *
+     * @return all transaction types
+     */
     @GetMapping("/all")
     @Operation(summary = "Get all transaction types", description = "Get all transaction types")
     @ApiResponse(
@@ -50,6 +67,13 @@ public class Transaction_TypesController {
         return transactionTypesService.getAllTransactionTypes();
     }
 
+    /**
+     * Update a transaction type.
+     *
+     * @param id the ID of the transaction type
+     * @param transactionType data needed to update the transaction type
+     * @return the updated transaction type
+     */
     @PutMapping("/update/{id}")
     @Operation(summary = "Update a transaction type", description = "Update a transaction type")
     @ApiResponse(
@@ -60,6 +84,11 @@ public class Transaction_TypesController {
         return transactionTypesService.updateTransactionType(id, transactionType);
     }
 
+    /**
+     * Delete a transaction type.
+     *
+     * @param id the ID of the transaction type
+     */
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete a transaction type", description = "Delete a transaction type")
     @ApiResponse(

@@ -6,6 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
 
+
+/**
+ * An entity TransactionsModel that describes the Transactions Model
+ * @Model TransactionsModel
+ */
 @Data
 @Entity
 @Getter

@@ -20,9 +20,19 @@ public class InsurancePoliciesController {
     @Autowired
     private InsurancePoliciesService insurancePoliciesService;
 
+    /**
+     * Create a new Insurance Policy.
+     *
+     * @param payload data needed to create a new Insurance Policy
+     * @return the created Insurance Policy
+     */
+
     @PostMapping("/create")
     @Operation(summary = "Create a new Insurance Policy", description = "Create a new insurance policy for a customer")
-    @ApiResponse(responseCode = "200", description = "Insurance policy created")
+    @ApiResponse(
+            responseCode = "200", description = "Insurance policy created"
+            responseCode = "500", description = "Error creating insurance policy"
+    )
     public ResponseEntity<?> createInsurancePolicy(@RequestBody Map<String, Object> payload) {
         try {
             int customerId = (int) payload.get("customerId");
@@ -39,10 +49,18 @@ public class InsurancePoliciesController {
         }
     }
 
-
+    /**
+     * Get an Insurance Policy by ID.
+     *
+     * @param policyId the ID of the Insurance Policy
+     * @return the Insurance Policy found
+     */
     @PutMapping("/updateStatus/{policyId}")
     @Operation(summary = "Update Policy Status", description = "Update the status of an existing insurance policy")
-    @ApiResponse(responseCode = "200", description = "Policy status updated")
+    @ApiResponse(
+            responseCode = "200", description = "Policy status updated"
+            responseCode = "400", description = "Error updating policy status"
+    )
     public ResponseEntity<?> updatePolicyStatus(@PathVariable int policyId, @RequestBody Map<String, Object> policyDetails) {
         try {
             String policyStatus = (String) policyDetails.get("policyStatus");
@@ -54,9 +72,18 @@ public class InsurancePoliciesController {
         }
     }
 
+    /**
+     * Get an Insurance Policy by ID.
+     *
+     * @param policyId the ID of the Insurance Policy
+     * @return the Insurance Policy found
+     */
     @DeleteMapping("/delete/{policyId}")
     @Operation(summary = "Delete an Insurance Policy", description = "Delete an existing insurance policy")
-    @ApiResponse(responseCode = "200", description = "Insurance policy deleted")
+    @ApiResponse(
+            responseCode = "200", description = "Insurance policy deleted"
+            responseCode = "404", description = "Error deleting insurance policy"
+    )
     public ResponseEntity<?> deleteInsurancePolicy(@PathVariable int policyId) {
         try {
             insurancePoliciesService.deleteInsurancePolicy(policyId);
@@ -67,9 +94,18 @@ public class InsurancePoliciesController {
         }
     }
 
+    /**
+     * Get an Insurance Policy by ID.
+     *
+     * @param policyId the ID of the Insurance Policy
+     * @return the Insurance Policy found
+     */
     @GetMapping("/detailsByCustomer/{customerId}")
     @Operation(summary = "Get Insurance Policy Details by Customer ID", description = "Get insurance policy details including product name, policy status, and expiration date")
-    @ApiResponse(responseCode = "200", description = "Insurance policy details retrieved")
+    @ApiResponse(
+            responseCode = "200", description = "Insurance policy details retrieved"
+            responseCode = "404", description = "No policies found for customer ID"
+    )
     public ResponseEntity<?> getPolicyDetailsByCustomerId(@PathVariable int customerId) {
         List<Map<String, Object>> policyDetails = insurancePoliciesService.getPolicyDetailsByCustomerId(customerId);
         return policyDetails.isEmpty() ?

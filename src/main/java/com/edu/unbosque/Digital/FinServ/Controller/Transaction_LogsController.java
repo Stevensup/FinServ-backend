@@ -20,6 +20,12 @@ public class Transaction_LogsController {
     @Autowired
     private Transaction_LogsService transactionLogsService;
 
+    /**
+     * Create a new transaction log.
+     *
+     * @param transactionLog data needed to create a new transaction log
+     * @return the created transaction log
+     */
     @PostMapping("/create")
     @Operation(summary = "Create a new transaction log", description = "Create a new transaction log")
     @ApiResponse(
@@ -30,6 +36,12 @@ public class Transaction_LogsController {
         return transactionLogsService.createTransactionLog(transactionLog);
     }
 
+    /**
+     * Get a transaction log by ID.
+     *
+     * @param id the ID of the transaction log
+     * @return the transaction log found
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Get a transaction log by ID", description = "Get a transaction log by ID")
     @ApiResponse(
@@ -40,6 +52,11 @@ public class Transaction_LogsController {
         return transactionLogsService.getTransactionLogById(id);
     }
 
+    /**
+     * Get all transaction logs.
+     *
+     * @return all transaction logs
+     */
     @GetMapping("/all")
     @Operation(summary = "Get all transaction logs", description = "Get all transaction logs")
     @ApiResponse(
@@ -50,6 +67,13 @@ public class Transaction_LogsController {
         return transactionLogsService.getAllTransactionLogs();
     }
 
+    /**
+     * Update a transaction log.
+     *
+     * @param id the ID of the transaction log
+     * @param transactionLog data needed to update the transaction log
+     * @return the updated transaction log
+     */
     @PutMapping("/update/{id}")
     @Operation(summary = "Update a transaction log", description = "Update a transaction log")
     @ApiResponse(
@@ -60,6 +84,11 @@ public class Transaction_LogsController {
         return transactionLogsService.updateTransactionLog(id, transactionLog);
     }
 
+    /**
+     * Delete a transaction log.
+     *
+     * @param id the ID of the transaction log
+     */
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete a transaction log", description = "Delete a transaction log")
     @ApiResponse(

@@ -6,6 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
 
+
+/**
+ * An entity Customer_ProductsModel that describes the Customer Products Model
+ * @Model Customer_ProductsModel
+ */
 @Data
 @Entity
 @Getter

@@ -22,6 +22,12 @@ public class PqrsController {
     @Autowired
     private PqrsService pqrsService;
 
+    /**
+     * Create a new PQRS.
+     *
+     * @param pqrs data needed to create a new PQRS
+     * @return the created PQRS
+     */
     @PostMapping("/create")
     @Operation(summary = "Create a new PQRS", description = "Create a new PQRS")
     @ApiResponse(
@@ -38,6 +44,12 @@ public class PqrsController {
         }
     }
 
+    /**
+     * Get a PQRS by ID.
+     *
+     * @param id the ID of the PQRS
+     * @return the PQRS found
+     */
     @GetMapping("/findByCustomer/{customerId}")
     @Operation(summary = "Get all PQRS by Customer ID", description = "Get all PQRS entries associated with a customer")
     @ApiResponse(
@@ -54,6 +66,12 @@ public class PqrsController {
     }
 
 
+    /**
+     * Get a PQRS by ID.
+     *
+     * @param id the ID of the PQRS
+     * @return the PQRS found
+     */
     @PutMapping("/update/{id}")
     @Operation(summary = "Update a PQRS", description = "Update a PQRS")
     @ApiResponse(
@@ -70,6 +88,12 @@ public class PqrsController {
         }
     }
 
+    /**
+     * Get a PQRS by ID.
+     *
+     * @param id the ID of the PQRS
+     * @return the PQRS found
+     */
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete a PQRS", description = "Delete a PQRS")
     @ApiResponse(

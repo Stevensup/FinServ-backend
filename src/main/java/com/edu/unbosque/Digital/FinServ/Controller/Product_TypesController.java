@@ -22,6 +22,12 @@ public class Product_TypesController {
     @Autowired
     private Product_TypesService product_typesService;
 
+    /**
+     * Create a new Product_Types.
+     *
+     * @param product_types data needed to create a new Product_Types
+     * @return the created Product_Types
+     */
     @PostMapping("/create")
     @Operation(summary = "Create a new Product_Types", description = "Create a new Product_Types")
     @ApiResponse(
@@ -32,6 +38,12 @@ public class Product_TypesController {
         return product_typesService.createProduct_Types(product_types);
     }
 
+    /**
+     * Get a Product_Types by ID.
+     *
+     * @param id the ID of the Product_Types
+     * @return the Product_Types found
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Get a Product_Types by id", description = "Get a Product_Types by id")
     @ApiResponse(
@@ -42,6 +54,11 @@ public class Product_TypesController {
         return product_typesService.getProductTypesById(id);
     }
 
+    /**
+     * Get all Product_Types.
+     *
+     * @return all Product_Types
+     */
     @GetMapping("/all")
     @Operation(summary = "Get all Product_Types", description = "Get all Product_Types")
     @ApiResponse(
@@ -52,6 +69,13 @@ public class Product_TypesController {
         return product_typesService.getAllProductTypes();
     }
 
+    /**
+     * Update a Product_Types.
+     *
+     * @param id the ID of the Product_Types
+     * @param product_types data needed to update a Product_Types
+     * @return the updated Product_Types
+     */
     @PutMapping("/update/{id}")
     @Operation(summary = "Update a Product_Types ", description = "Update a Product_Types")
     @ApiResponse(
@@ -62,6 +86,11 @@ public class Product_TypesController {
         return product_typesService.updateProduct_Types(id, product_types);
     }
 
+    /**
+     * Delete a Product_Types.
+     *
+     * @param id the ID of the Product_Types
+     */
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete a Product_Types", description = "Delete a Product_Types")
     @ApiResponse(

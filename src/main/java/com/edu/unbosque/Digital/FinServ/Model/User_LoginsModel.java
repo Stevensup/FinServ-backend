@@ -7,6 +7,10 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
 
+/**
+ * An entity User_LoginsModel that describes the User Logins Model
+ * @Model User_LoginsModel
+ */
 @Data
 @Entity
 @Getter

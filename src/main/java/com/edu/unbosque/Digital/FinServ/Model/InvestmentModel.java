@@ -6,6 +6,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 
+
+/**
+ * An entity InvestmentModel that describes the Investment Model
+ * @Model InvestmentModel
+ */
 @Data
 @Entity
 @Table(name = "investments")

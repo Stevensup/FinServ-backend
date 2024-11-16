@@ -23,53 +23,82 @@ public class Login_AttemptsController {
     @Autowired
     private Login_AttemptsService login_attemptsService;
 
+    /**
+     * Create a new Login_Attempts.
+     *
+     * @param login_attempts data needed to create a new Login_Attempts
+     * @return the created Login_Attempts
+     */
     @PostMapping("/create")
     @Operation(summary = "Create a new Login_attempts", description = "Create a new Login_attempts")
     @ApiResponse(
-        responseCode = "200", 
-        description = "Login_Attempts created"
+        responseCode = "200", description = "Login_Attempts created"
+        responseCode = "500", description = "Error creating Login_Attempts"
     )
     public Login_AttemptsModel createLoginAttempts(@RequestBody Login_AttemptsModel login_attempts){
         return login_attemptsService.createLogin_attempts(login_attempts);
     }
 
+    /**
+     * Get a Login_Attempts by ID.
+     *
+     * @param id the ID of the Login_Attempts
+     * @return the Login_Attempts found
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Get a Login_attempts by ID", description = "Get a Login_attempts by ID")
     @ApiResponse(
-        responseCode = "200", 
-        description = "Login_Attempts found"
+        responseCode = "200", description = "Login_Attempts found"
+        responseCode = "404", description = "Login_Attempts not found"
     )
     public Optional<Login_AttemptsModel> getLoginAttemptsById(@PathVariable int id){
         return login_attemptsService.getLoginAttemptsById(id);
     }
 
+    /**
+     * Get all Login_Attempts.
+     *
+     * @return all Login_Attempts
+     */
     @GetMapping("/all")
     @Operation(summary = "Get all Login_attempts", description = "Get all Login_attempts")
     @ApiResponse(
-        responseCode = "200", 
-        description = "Login_Attempts retrieved"
+        responseCode = "200", description = "Login_Attempts retrieved"
+        responseCode = "404", description = "Login_Attempts not found"
     )
 
     public List<Login_AttemptsModel> getAllLoginAttempts(){
         return login_attemptsService.getAllLoginAttempts();
     }
 
+    /**
+     * Update a Login_Attempts.
+     *
+     * @param id the ID of the Login_Attempts
+     * @param loginAttempts data needed to update a Login_Attempts
+     * @return the updated Login_Attempts
+     */
     @PutMapping("/update/{id}")
     @Operation(summary = "Update a Login_attempts", description = "Update a Login_attempts")
     @ApiResponse(
-        responseCode = "200", 
-        description = "Login_Attempts updated"
+        responseCode = "200", description = "Login_Attempts updated"
+        responseCode = "500", description = "Error updating Login_Attempts"
     )
 
     public Login_AttemptsModel updateLoginAttempts(@PathVariable int id, @RequestBody Login_AttemptsModel loginAttempts){
         return login_attemptsService.updateLoginAttempts(id, loginAttempts);
     }
 
+    /**
+     * Delete a Login_Attempts.
+     *
+     * @param id the ID of the Login_Attempts
+     */
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete a Login_attempts", description = "Delete a Login_attempts")
     @ApiResponse(
-        responseCode = "200", 
-        description = "Login_Attempts deleted"
+        responseCode = "200", description = "Login_Attempts deleted"
+        responseCode = "500", description = "Error deleting Login_Attempts"
     )
 
     public void deleteLoginAttempts(@PathVariable int id){

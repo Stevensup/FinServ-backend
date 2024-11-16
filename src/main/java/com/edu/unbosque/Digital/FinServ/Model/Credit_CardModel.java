@@ -7,6 +7,10 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * An entity Credit_CardModel that describes the Credit Card Model
+ * @Model Credit_CardModel
+ */
 @Data
 @Entity
 @Table(name = "credit_card")

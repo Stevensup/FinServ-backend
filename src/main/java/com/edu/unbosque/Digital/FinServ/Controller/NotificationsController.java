@@ -21,6 +21,12 @@ public class NotificationsController{
     @Autowired
     private NotificationsService notificationsService;
 
+    /**
+     * Create a new notifications.
+     *
+     * @param notifications data needed to create a new notifications
+     * @return the created notifications
+     */
     @PostMapping("create")
     @Operation(summary = "Create a new notifications", description = "Create a new notifications")
     @ApiResponse(
@@ -32,6 +38,12 @@ public class NotificationsController{
         return notificationsService.createNotifications(notifications);
     }
 
+    /**
+     * Get a notifications by ID.
+     *
+     * @param id the ID of the notifications
+     * @return the notifications found
+     */
     @GetMapping("/{id}")
     @Operation(summary = "Get a notifications by ID", description = "Get a notifications by ID")
     @ApiResponse(
@@ -43,6 +55,11 @@ public class NotificationsController{
         return Optional.ofNullable(notificationsService.getNotificationsById(id));
     }
 
+    /**
+     * Get all notifications.
+     *
+     * @return all notifications
+     */
     @GetMapping("/all")
     @Operation(summary = "Get all notifications", description = "Get all notifications")
     @ApiResponse(
@@ -54,6 +71,13 @@ public class NotificationsController{
         return notificationsService.getAllNotifications();
     }
 
+    /**
+     * Update a notifications.
+     *
+     * @param id the ID of the notifications
+     * @param notifications data needed to update a notifications
+     * @return the updated notifications
+     */
     @PutMapping("/update/{id}")
     @Operation(summary = "Update a notifications", description = "Update a notifications")
     @ApiResponse(
@@ -65,6 +89,11 @@ public class NotificationsController{
         return notificationsService.updateNotifications(id, notifications);
     }
 
+    /**
+     * Delete a notifications.
+     *
+     * @param id the ID of the notifications
+     */
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Delete a notifications", description = "Delete a notifications")
     @ApiResponse(

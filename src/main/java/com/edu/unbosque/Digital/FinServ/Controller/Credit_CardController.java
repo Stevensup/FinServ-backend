@@ -58,6 +58,13 @@ public class Credit_CardController {
         }
     }
 
+    /**
+     * Obtiene una tarjeta de crédito por ID.
+     *
+     * @param id ID de la tarjeta de crédito
+     * @return la tarjeta de crédito encontrada
+     */
+
     @PutMapping("/updateLimit/{id}")
     @Operation(summary = "Actualizar el límite de crédito", description = "Actualiza el límite de crédito de una tarjeta de crédito.")
     @ApiResponses(value = {
@@ -76,6 +83,13 @@ public class Credit_CardController {
         }
     }
 
+    /**
+     * Obtiene una tarjeta de crédito por ID.
+     *
+     * @param id ID de la tarjeta de crédito
+     * @return la tarjeta de crédito encontrada
+     */
+
     @GetMapping("/detailsByCustomer/{customerId}")
     @Operation(summary = "Obtener tarjetas de crédito por cliente", description = "Obtiene las tarjetas de crédito de un cliente.")
     @ApiResponses(value = {
@@ -92,6 +106,13 @@ public class Credit_CardController {
                     .body("Error obteniendo tarjetas de crédito: " + e.getMessage());
         }
     }
+
+    /**
+     * Obtiene una tarjeta de crédito por ID.
+     *
+     * @param id ID de la tarjeta de crédito
+     * @return la tarjeta de crédito encontrada
+     */
 
     @DeleteMapping("/delete/{id}")
     @Operation(summary = "Eliminar tarjeta de crédito", description = "Elimina una tarjeta de crédito.")

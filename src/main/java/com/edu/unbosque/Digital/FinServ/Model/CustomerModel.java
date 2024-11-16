@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 import java.util.Date;
 
+
+/**
+ * An entity CustomerModel that describes the Customer Model
+ * @Model CustomerModel
+ */
 @Data
 @Entity
 @Table(name = "customers")

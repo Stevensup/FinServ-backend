@@ -6,6 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
 
+
+/**
+ * An entity Login_AttemptsModel that describes the Login Attempts Model
+ * @Model Login_AttemptsModel
+ */
 @Data
 @Entity
 @Getter

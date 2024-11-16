@@ -32,6 +32,12 @@ public class AuthController {
             Pattern.CASE_INSENSITIVE
     );
 
+    /**
+     * Login to the application
+     * @param loginRequest
+     * @return
+     */
+
     @PostMapping("/login")
     @Operation(summary = "Login to the application", description = "Authenticate a user and return their customer ID")
     @ApiResponses(value = {

@@ -6,6 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.List;
 
+
+/**
+ * An entity Transaction_TypesModel that describes the Transaction Types Model
+ * @Model Transaction_TypesModel
+ */
 @Data
 @Entity
 @Getter

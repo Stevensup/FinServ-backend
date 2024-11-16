@@ -12,6 +12,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Service class for managing investments.
+ */
 @Service
 public class InvestmentService {
 

@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-
+/**
+ * Service class for managing insurance policies.
+ */
 @Service
 public class InsurancePoliciesService {
 

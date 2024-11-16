@@ -10,5 +10,4 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface Transaction_LogsRepository extends JpaRepository<Transaction_LogsModel, Integer> {
-    // Additional query methods can be added here
 }

@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repository interface for PqrsModel.
+ * This interface provides methods to perform CRUD operations on PqrsModel.
+ */
 @Repository
 public interface PqrsRepository extends JpaRepository<PqrsModel, Integer> {
     List<PqrsModel> findByCustomerId(int customerId);

@@ -10,5 +10,4 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface NotificationsRepository extends JpaRepository<NotificationsModel, Integer> {
-    // Additional query methods can be added here
 }

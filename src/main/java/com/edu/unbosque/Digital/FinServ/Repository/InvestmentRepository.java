@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repository interface for InvestmentModel.
+ * This interface provides methods to perform CRUD operations on InvestmentModel.
+ */
 @Repository
 public interface InvestmentRepository extends JpaRepository<InvestmentModel, Integer> {
     List<InvestmentModel> findByCustomerId(int customerId);
